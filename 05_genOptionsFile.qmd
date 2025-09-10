@@ -6,8 +6,6 @@ format:
     include-after-body: floating-link.html
 ---
 
-# 3. OPTION FILE GENERATION
-
 The **mcda.R** script uses an option file in .json format to pick the information on the criteria needed into the analysis (sub-criteria, weights, utility functions, reference points and input data path).
 
 **export_json.R** generates this type of file and can be edited as desired as long as the same criteria names are used into the **mcda.R** script and found as columns in the input .csv files

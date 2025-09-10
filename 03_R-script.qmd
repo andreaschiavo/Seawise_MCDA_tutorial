@@ -178,7 +178,7 @@ mcda <- aggregate_utilities(mcda, criteria = c('co2'), label = "climate change",
 
 ```
 
-# 8 Total utility
+# 7 Total utility
 
 Now, the total utility is calculated resulting from the combination of the passed macro-criteria, across all the scenarios and time-periods.
 

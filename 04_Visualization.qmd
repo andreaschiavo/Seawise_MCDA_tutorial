@@ -84,7 +84,7 @@ tops = top_scenarios(dataframe = df,
 
 3 types of graphs can be generate with this library using the dataframe output from the MCDA analysis:
 
-# 1 Stacked bar chart (*plot_histogram*):
+# 1. Stacked bar chart (*plot_histogram*):
 
 This function generates a stacked bar chart. On the x axis the scenarios, on the y axis the utility values for the criteria of the MCDA.
 *weights* argument is always needed;
@@ -109,7 +109,7 @@ plot_histogram(df,
 ```
 
 
-### 2 Utility matrix visualization (*plot_matrix*)
+# 2. Utility matrix visualization (*plot_matrix*)
 
 This function generates matrix plot. On the x axis the criteria, on the y axis the scenarios, while the color gradient represent the utility values.
 *criteria* (default, = "all") is the list of criteria to plot;
@@ -125,7 +125,7 @@ plot_matrix(df, criteria = c("stocks", "biodiversity","habitats", "community", "
 
 ```
 
-### 3 Parallel plot (*plot_parallel_graph*)
+# 3. Parallel plot (*plot_parallel_graph*)
 
 This function generates a parallel plot. On the x axis the criteria, on the y axis the utilities; the plots connecting the criteria axes are the utilities of the different scenarios.
 

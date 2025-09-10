@@ -186,11 +186,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#stacked-bar-chart-plot_histogram" id="toc-stacked-bar-chart-plot_histogram" class="nav-link active" data-scroll-target="#stacked-bar-chart-plot_histogram">1 Stacked bar chart (<em>plot_histogram</em>):</a>
-  <ul class="collapse">
-  <li><a href="#utility-matrix-visualization-plot_matrix" id="toc-utility-matrix-visualization-plot_matrix" class="nav-link" data-scroll-target="#utility-matrix-visualization-plot_matrix">2 Utility matrix visualization (<em>plot_matrix</em>)</a></li>
-  <li><a href="#parallel-plot-plot_parallel_graph" id="toc-parallel-plot-plot_parallel_graph" class="nav-link" data-scroll-target="#parallel-plot-plot_parallel_graph">3 Parallel plot (<em>plot_parallel_graph</em>)</a></li>
-  </ul></li>
+  <li><a href="#stacked-bar-chart-plot_histogram" id="toc-stacked-bar-chart-plot_histogram" class="nav-link active" data-scroll-target="#stacked-bar-chart-plot_histogram">1. Stacked bar chart (<em>plot_histogram</em>):</a></li>
+  <li><a href="#utility-matrix-visualization-plot_matrix" id="toc-utility-matrix-visualization-plot_matrix" class="nav-link" data-scroll-target="#utility-matrix-visualization-plot_matrix">2. Utility matrix visualization (<em>plot_matrix</em>)</a></li>
+  <li><a href="#parallel-plot-plot_parallel_graph" id="toc-parallel-plot-plot_parallel_graph" class="nav-link" data-scroll-target="#parallel-plot-plot_parallel_graph">3. Parallel plot (<em>plot_parallel_graph</em>)</a></li>
   </ul>
 </nav>
     </div>
@@ -218,7 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>3 types of graphs can be generate with this library using the dataframe output from the MCDA analysis:</p>
 <section id="stacked-bar-chart-plot_histogram" class="level1">
-<h1>1 Stacked bar chart (<em>plot_histogram</em>):</h1>
+<h1>1. Stacked bar chart (<em>plot_histogram</em>):</h1>
 <p>This function generates a stacked bar chart. On the x axis the scenarios, on the y axis the utility values for the criteria of the MCDA. <em>weights</em> argument is always needed; <em>parents</em> argument is needed in case <em>subcriteria</em> is set to TRUE; <em>scenarios</em> (default, = NULL) can be passed as a list of scenarios to compare fewer alternatives. If NULL or blank, all the scenarios included in the MCDA are plotted; <em>subcriteria</em> (default FALSE) can be set to TRUE to plot the sub-criteria of the criteria passed; <em>color</em> (default, = “Set3”) can be modified with a discrete color palette from <strong>RColorBrewer</strong>;</p>
 <p>v.0 notes: when plotting macro-criteria and setting <em>subcriteria</em> as TRUE, the legend for the macro-criteria is not visualized</p>
 <div class="cell">
@@ -237,8 +235,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<section id="utility-matrix-visualization-plot_matrix" class="level3">
-<h3 class="anchored" data-anchor-id="utility-matrix-visualization-plot_matrix">2 Utility matrix visualization (<em>plot_matrix</em>)</h3>
+</section>
+<section id="utility-matrix-visualization-plot_matrix" class="level1">
+<h1>2. Utility matrix visualization (<em>plot_matrix</em>)</h1>
 <p>This function generates matrix plot. On the x axis the criteria, on the y axis the scenarios, while the color gradient represent the utility values. <em>criteria</em> (default, = “all”) is the list of criteria to plot; <em>scenarios</em> (default, = “all”) is the list of scenarios to plot; <em>color</em> (default, = “Set3”) can be modified with a discrete color palette from <strong>RColorBrewer</strong>; <em>style</em> (default, = “minimal”) set the style of the plot</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_matrix</span>(df, <span class="at">criteria =</span> <span class="fu">c</span>(<span class="st">"stocks"</span>, <span class="st">"biodiversity"</span>,<span class="st">"habitats"</span>, <span class="st">"community"</span>, <span class="st">"revenue"</span>, <span class="st">"climate change"</span>, <span class="st">"total_utility"</span>),</span>
@@ -252,8 +251,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="parallel-plot-plot_parallel_graph" class="level3">
-<h3 class="anchored" data-anchor-id="parallel-plot-plot_parallel_graph">3 Parallel plot (<em>plot_parallel_graph</em>)</h3>
+<section id="parallel-plot-plot_parallel_graph" class="level1">
+<h1>3. Parallel plot (<em>plot_parallel_graph</em>)</h1>
 <p>This function generates a parallel plot. On the x axis the criteria, on the y axis the utilities; the plots connecting the criteria axes are the utilities of the different scenarios.</p>
 <p><em>criteria</em> is the list of criteria to plot; <em>highlight</em> (default, = “top”) is the criterion for selecting the highlighted scenarios; <em>top_bottom_criterion</em> (default, = “total_utility”) the criterion for sorting of the top scenarios (this function uses the <em>top_scenario</em> function);</p>
 <p>v.0 note: only top 5 scenarios sorted by “total_utility” can be highlighted in this version. the idea is to having the possibility to pass a list of scenarios into <em>highlight</em> to highlight those in the chart</p>
@@ -271,7 +270,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

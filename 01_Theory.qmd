@@ -10,15 +10,14 @@ format:
 
 # Introduction
 
-In decision-making processes we are often confronted with multiple options or scenarios, each carrying different values with respect to the criteria or attributes that we consider important.
-By comparing these criteria to reference thresholds, we can define our level of satisfaction with the different options.
+In decision-making processes, we are often confronted with multiple options or scenarios, each carrying different values with respect to the criteria or attributes that we consider important.
+By comparing these criteria against reference thresholds, we can define our level of satisfaction with the different options.
 
-
-However, decision-making is rarely straightforward: stakeholders usually have diverse interests, which generate conflicts and unresolved trade-offs among alternatives.
+However, decision-making is rarely straightforward. Stakeholders usually have diverse interests, which generate conflicts and unresolved trade-offs among alternatives.
 
 # MCDA
 
-Multicriteria Decision Methods, or MCDM, provide a structured framework to address this complexity. They allow decision-makers to recognize possible trade-offs, to account for conflicting viewpoints, and to evaluate objectives that cannot be reduced to a single monetary dimension. This is particularly relevant in natural resource management, as shown in previous studies by Mardle and Pascoe (1999), Andalecio (2010), and Melià and colleagues (2017).
+Multicriteria Decision Analysis (MCDA) provides a structured framework to address this complexity. It enables decision-makers to recognize possible trade-offs, to account for conflicting viewpoints, and to evaluate objectives that cannot be reduced to a single monetary dimension.
 
 
 <p align="center">
@@ -28,17 +27,11 @@ Multicriteria Decision Methods, or MCDM, provide a structured framework to addre
 
 ## MCDA in Fisheries Management
 
-Fisheries management is a clear example. Here, the challenge is to reconcile objectives such as maximizing fishing yields and profits while minimizing ecological and social impacts. The transition towards an ecosystem-based fisheries management approach complicates this even further, because of the growing number of indicators used to describe the system. These indicators give us a holistic view of the ecosystem, but they also increase the number of conflicts and trade-offs that must be addressed.
-
+Fisheries management provides a clear example. Here, the challenge is to reconcile objectives such as maximizing fishing yields and profits while minimizing ecological and social impacts. The transition towards an ecosystem-based fisheries management approach makes this even more complex, due to the growing number of indicators used to describe the system. These indicators provide a holistic view of the ecosystem, but they also increase the number of conflicts and trade-offs that must be addressed.
 
 # Multi-Attribute Utility Theory (MAUT)
 
-Among the different MCDM approaches, Multi-Attribute Utility Theory, or MAUT (Keeney and Raiffa 1993), has gained particular relevance in resource and environmental management. MAUT is based on the idea that decision-makers aim to maximize their overall satisfaction, or expected utility, across multiple independent attributes — each representing a decision objective.
-
-
-<p align="center">
-  <img src="png/tradeoff_seawise.png" width="100%"/>
-</p>
+Among the different MCDA approaches, Multi-Attribute Utility Theory (MAUT; Keeney and Raiffa, 1993) has gained particular relevance in resource and environmental management. MAUT is based on the idea that decision-makers aim to maximize their overall satisfaction, or expected utility, across multiple independent attributes — each representing a decision objective.
 
 ## MAUT key steps
 
@@ -50,9 +43,13 @@ The main steps of MAUT are the following:
  - aggregating weighted utilities into a composite score representing the overall performance of a scenario;
  - comparing scenarios in terms of overall performance.
 
+<p align="center">
+  <img src="png/maut.png" width="100%"/>
+</p>
+
 ## Utility scores
 
-The performance of each objective is translated into a utility score, and these partial utilities are then aggregated into a single measure of overall performance. This facilitates clear comparisons among management scenarios, promotes stakeholder engagement, and supports transparent, evidence-based policies.
+The performance of each objective is translated into a utility score, and these partial utilities are then aggregated into a single measure of overall performance. This facilitates clear comparisons among management scenarios, promotes stakeholder engagement, and supports transparent, evidence-based policy-making.
 
 <p align="center">
   <img src="png/Immagine2.png" width="45%"/>

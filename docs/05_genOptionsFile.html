@@ -180,14 +180,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#option-file-generation" id="toc-option-file-generation" class="nav-link active" data-scroll-target="#option-file-generation">3. OPTION FILE GENERATION</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -211,8 +205,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="option-file-generation" class="level1">
-<h1>3. OPTION FILE GENERATION</h1>
 <p>The <strong>mcda.R</strong> script uses an option file in .json format to pick the information on the criteria needed into the analysis (sub-criteria, weights, utility functions, reference points and input data path).</p>
 <p><strong>export_json.R</strong> generates this type of file and can be edited as desired as long as the same criteria names are used into the <strong>mcda.R</strong> script and found as columns in the input .csv files</p>
 <p>The reference points follow these criteria: - ssb: c(Blim, Bmsy, U_Blim, U_Bmsy) U_Blim is set to 0.1, U_Bmsy is set to 0.99 In case of stocks for which biomass indicators are not available the reference points are: c(1/2 Bcurrent, Bcurrent, U_1/2Bcurrent, UBcurrent) U_1/2Bcurrent is set to 0.1, U_Bcurrent is set to 0.5</p>
@@ -279,7 +271,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script>
