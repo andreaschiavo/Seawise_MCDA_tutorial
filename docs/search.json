@@ -6,7 +6,7 @@
     "section": "",
     "text": "Welcome\nThis is a tutorial to run a MCDA analysis on the output of the models from Seawise H2020 project case studies. The tutorial is divided into 3 sections:\n\nMulti-Criteria Decision Analysis concept, what is MCDA? what are possible applications? what has been done in Seawise?;\nSeawise MCDA example, briefly introducing the approach adopted in the Seawise project;\nR-script, displaying a trial of the mcda.R script developed within the Seawise project;\nVisualization, showcasing the use of 3 buil-in function to plot MCDA results;\nOptions File , showing the preparation of the options file for the mcda.R script.\n\nFor additional information on the Seawise MCDA results consult SEAwise Report on the impacts of fisheries on stocks and landings under SEAwise EBFM - Garcìa et al. 2025\nVisit the Seawise youtube channel for other courses and tutorials on EBFM methods.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>SeaWise WP6.12 Tutorial - MCDA</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Index</span>"
     ]
   },
   {
