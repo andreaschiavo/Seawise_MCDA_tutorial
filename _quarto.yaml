@@ -8,11 +8,10 @@ book:
   chapters:
     - index.qmd
     - 01_Theory.qmd
-    - 01_Theory Seawise_example.qmd
-    - 02_R-script.qmd
-    - 03_Visualization.qmd
-    - genOptionsFile.qmd
-  site-url: index.qmd
+    - 02_Theory Seawise_example.qmd
+    - 03_R-script.qmd
+    - 04_Visualization.qmd
+    - 05_genOptionsFile.qmd
 
 format:
   html:

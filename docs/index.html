@@ -124,22 +124,22 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01_Theory Seawise_example.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Seawise MCDA example</span></a>
+  <a href="./02_Theory Seawise_example.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Seawise MCDA example</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02_R-script.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">R-script</span></a>
+  <a href="./03_R-script.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">R-script</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_Visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Visualization</span></a>
+  <a href="./04_Visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Visualization</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./genOptionsFile.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Option file Generation</span></a>
+  <a href="./05_genOptionsFile.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Option file Generation</span></a>
   </div>
 </li>
     </ul>
@@ -187,7 +187,7 @@ ul.task-list li input[type="checkbox"] {
 <p>This is a tutorial to run a MCDA analysis on the output of the models from Seawise H2020 project case studies. The tutorial is divided into 3 sections:</p>
 <ul>
 <li><a href="01_Theory.html">Multi-Criteria Decision Analysis concept</a>, what is MCDA? what are possible applications? what has been done in Seawise?;</li>
-<li><a href="./01_Theory Seawise_example.html">Seawise MCDA example</a>, briefly introducing the approach adopted in the Seawise project;</li>
+<li><a href="01_Theory Seawise_example.qmd">Seawise MCDA example</a>, briefly introducing the approach adopted in the Seawise project;</li>
 <li><a href="02_R-script.html">R-script</a>, displaying a trial of the <em>mcda.R</em> script developed within the Seawise project;</li>
 <li><a href="03_Visualization.html">Visualization</a>, showcasing the use of 3 buil-in function to plot MCDA results;</li>
 <li><a href="genOptionsFile.html">Options File</a> , showing the preparation of the options file for the mcda.R script.</li>
@@ -324,7 +324,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("index\.qmd");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
