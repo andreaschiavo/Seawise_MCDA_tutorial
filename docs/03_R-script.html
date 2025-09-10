@@ -186,10 +186,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#input-file-format" id="toc-input-file-format" class="nav-link active" data-scroll-target="#input-file-format">1. INPUT FILE FORMAT</a></li>
+  <li><a href="#input-file-format" id="toc-input-file-format" class="nav-link active" data-scroll-target="#input-file-format">1. Input file format</a></li>
   <li><a href="#set-up-scenarios-and-criteria" id="toc-set-up-scenarios-and-criteria" class="nav-link" data-scroll-target="#set-up-scenarios-and-criteria">2 Set-up scenarios and criteria</a></li>
-  <li><a href="#initialize-the-mcda-object" id="toc-initialize-the-mcda-object" class="nav-link" data-scroll-target="#initialize-the-mcda-object">3 initialize the MCDA object</a></li>
-  <li><a href="#load-input-data-and-calculate-the-utitlity-scores" id="toc-load-input-data-and-calculate-the-utitlity-scores" class="nav-link" data-scroll-target="#load-input-data-and-calculate-the-utitlity-scores">4 load input data and calculate the utitlity scores</a></li>
+  <li><a href="#initialize-the-mcda-object" id="toc-initialize-the-mcda-object" class="nav-link" data-scroll-target="#initialize-the-mcda-object">3 Initialize the MCDA object</a></li>
+  <li><a href="#load-input-data-and-calculate-the-utitlity-scores" id="toc-load-input-data-and-calculate-the-utitlity-scores" class="nav-link" data-scroll-target="#load-input-data-and-calculate-the-utitlity-scores">4 Load input data and calculate the utitlity scores</a></li>
   <li><a href="#weightings-system" id="toc-weightings-system" class="nav-link" data-scroll-target="#weightings-system">5 Weightings system</a></li>
   <li><a href="#criteria-aggregation" id="toc-criteria-aggregation" class="nav-link" data-scroll-target="#criteria-aggregation">6 Criteria aggregation</a>
   <ul class="collapse">
@@ -223,7 +223,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <section id="input-file-format" class="level1">
-<h1>1. INPUT FILE FORMAT</h1>
+<h1>1. Input file format</h1>
 <p>The <strong>mcda.R</strong> script needs a specific input data format and must have the following structure:</p>
 <p>column1: <em>“time_period”</em>, column2: <em>“scenario”</em>, (optional) column3: <em>“other colums(e.g.&nbsp;quantile level)”</em>, column4-columnN: <name_of_the_criteria></name_of_the_criteria></p>
 <p>If one or more criteria have sub_criteria:</p>
@@ -271,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>A sub_criteria list of lists can be passed to select a subset of the sub-criteria.</p>
 </section>
 <section id="initialize-the-mcda-object" class="level1">
-<h1>3 initialize the MCDA object</h1>
+<h1>3 Initialize the MCDA object</h1>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mcda <span class="ot">&lt;-</span> <span class="fu">Mcda</span>(time_period,</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>             scenarios,</span>
@@ -281,7 +281,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="load-input-data-and-calculate-the-utitlity-scores" class="level1">
-<h1>4 load input data and calculate the utitlity scores</h1>
+<h1>4 Load input data and calculate the utitlity scores</h1>
 <p>Load the input data and calculate the utitlities of the critaria based on the MCDA option file (see <a href="05_genOptionsFile.html">last section</a>) Utilities are calculated based on utility functions and reference points defined for each criteria into the options file.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mcda <span class="ot">&lt;-</span> <span class="fu">load_data</span>(mcda)</span>

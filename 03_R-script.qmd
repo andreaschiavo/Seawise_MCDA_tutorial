@@ -6,7 +6,7 @@ format:
     css: custom.css
     include-after-body: floating-link.html
 ---
-# 1. INPUT FILE FORMAT
+# 1. Input file format
 
 The **mcda.R** script needs a specific input data format and must have the following structure:
 
@@ -54,7 +54,7 @@ sub_criteria <- list(ssb = c('HKE', 'MUT', 'SOL'),
 A sub_criteria list of lists can be passed to select a subset of the sub-criteria.
 
 
-# 3 initialize the MCDA object
+# 3 Initialize the MCDA object
 
 ```{r, echo = TRUE}
 
@@ -66,7 +66,7 @@ mcda <- Mcda(time_period,
 
 ```
 
-# 4 load input data and calculate the utitlity scores
+# 4 Load input data and calculate the utitlity scores
 
 Load the input data and calculate the utitlities of the critaria based on the MCDA option file (see [last section](05_genOptionsFile.html))
 Utilities are calculated based on utility functions and reference points defined for each criteria into the options file.
