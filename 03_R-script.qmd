@@ -10,11 +10,11 @@ format:
 
 The **mcda.R** script needs a specific input data format and must have the following structure:
 
-column1: *"time_period"*, column2: *"scenario"*, (optional) column3: *"other colums(e.g. quantile level)"*, column4-columnN: <name_of_the_criteria>
+column1: *"time_period"*, column2: *"scenario"*, (optional) column3: *"other columns(e.g. quantile level)"*, column4-columnN: <name_of_the_criteria>
 
 If one or more criteria have sub_criteria:
 
-column1: *"time_period"*, column2: *"scenario"*, (optional) column3: *"quantile level"*, column4 *"sub_criteria"*, column5-n: <name_of_the_criteria>
+column1: *"time_period"*, column2: *"scenario"*, (optional) column3: *"quantile level"*, column4 *"sub_criteria"*, column5-columnN: <name_of_the_criteria>
 
 column names from 1 to 3/4 cannot be changed as the **mcda.R** script uses them to build the alternatives of the analysis.
 
@@ -83,7 +83,7 @@ quantile = 0.5 it's an additional argument (...).
 It is needed to add a filter to the input dataset and extract one single value of the criteria for each combination of time-period and management scenario (alternatives). Without this additional argument the function would filter only by time-period and scenario (default filter), returning a dataset with quantile levels (if present in the dataset) and failing the calculation of the utilities.
 
 
-# 5 Weightings system
+# 5 Weighting system
 
 It is always possible to modify the weights of the criteria/subcriteria included into the *mcda* object.
 Weights are saved into a separate vector and can be modified with the function *set_weights*.
