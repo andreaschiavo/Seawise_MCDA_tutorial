@@ -68,4 +68,6 @@ For every indicator, we defined a utility function that maps its value to a rang
 
 We defined a number of scenarios based on the combination of time periods, climatic projections and management strategies.
 
+*table with the scenarios here*
+
 
