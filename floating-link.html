@@ -1,0 +1,22 @@
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const div = document.createElement("div");
+  div.className = "floating-link-in-sidebar";
+  div.innerHTML = `
+    <div class="link-icons">
+      <a href="https://www.seawiseproject.org" target="_blank">
+        <img src="png/Seawise_blue.png" alt="SeaWise Logo">
+      </a>
+      <a href="https://github.com/ices-tools-dev/SEAwise" target="_blank">
+        <img src="png/github-mark-white.png" alt="GitHub">
+      </a>
+    </div>
+    <p class="sidebar-note">developed in Seawise</p>
+  `;
+
+  const sidebar = document.querySelector(".sidebar.sidebar-navigation");
+  if (sidebar) {
+    sidebar.appendChild(div);
+  }
+});
+</script>

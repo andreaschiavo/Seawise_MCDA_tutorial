@@ -1,0 +1,61 @@
+---
+title: "Multi-Criteria Decision Analysis (MCDA)"
+format:
+  html:
+    theme: simple
+    css: custom.css
+    include-after-body: floating-link.html
+    toc: false
+---
+
+# Introduction
+
+In decision-making processes we are often confronted with multiple options or scenarios, each carrying different values with respect to the criteria or attributes that we consider important.
+By comparing these criteria to reference thresholds, we can define our level of satisfaction with the different options.
+
+
+However, decision-making is rarely straightforward: stakeholders usually have diverse interests, which generate conflicts and unresolved trade-offs among alternatives.
+
+# MCDA
+
+Multicriteria Decision Methods, or MCDM, provide a structured framework to address this complexity. They allow decision-makers to recognize possible trade-offs, to account for conflicting viewpoints, and to evaluate objectives that cannot be reduced to a single monetary dimension. This is particularly relevant in natural resource management, as shown in previous studies by Mardle and Pascoe (1999), Andalecio (2010), and Melià and colleagues (2017).
+
+
+<p align="center">
+  <img src="png/tradeoff_seawise.png" width="100%"/>
+</p>
+
+
+## MCDA in Fisheries Management
+
+Fisheries management is a clear example. Here, the challenge is to reconcile objectives such as maximizing fishing yields and profits while minimizing ecological and social impacts. The transition towards an ecosystem-based fisheries management approach complicates this even further, because of the growing number of indicators used to describe the system. These indicators give us a holistic view of the ecosystem, but they also increase the number of conflicts and trade-offs that must be addressed.
+
+
+# Multi-Attribute Utility Theory (MAUT)
+
+Among the different MCDM approaches, Multi-Attribute Utility Theory, or MAUT (Keeney and Raiffa 1993), has gained particular relevance in resource and environmental management. MAUT is based on the idea that decision-makers aim to maximize their overall satisfaction, or expected utility, across multiple independent attributes — each representing a decision objective.
+
+
+<p align="center">
+  <img src="png/tradeoff_seawise.png" width="100%"/>
+</p>
+
+## MAUT key steps
+
+The main steps of MAUT are the following:
+ 
+ - identifying decision objectives and relevant indicators (attributes) to measure performance with respect to each of them;
+ - developing utility functions that express the desirability, or satisfaction, associated with a given indicator value;
+ - assigning weights to attributes reflecting their importance in the decision;
+ - aggregating weighted utilities into a composite score representing the overall performance of a scenario;
+ - comparing scenarios in terms of overall performance.
+
+## Utility scores
+
+The performance of each objective is translated into a utility score, and these partial utilities are then aggregated into a single measure of overall performance. This facilitates clear comparisons among management scenarios, promotes stakeholder engagement, and supports transparent, evidence-based policies.
+
+<p align="center">
+  <img src="png/Immagine2.png" width="45%"/>
+  <img src="png/Immagine3.png" width="45%"/>
+</p>
+

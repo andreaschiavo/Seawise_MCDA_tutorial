@@ -1,0 +1,23 @@
+project:
+  type: book
+
+book:
+  title: "SEAwise Tutorial WP6: Multi-Criteria Decision Analysis"
+  author: "Andrea Schiavo"
+  chapters:
+    - index.qmd
+    - 01_Theory.qmd
+    - 01_Theory Seawise_example.qmd
+    - 02_R-script.qmd
+    - 03_Visualization.qmd
+    - genOptionsFile.qmd
+  site-url: index.qmd
+
+format:
+  html:
+    theme: cosmo       # tema grafico
+    toc: true          # table of contents
+    number-sections: false
+    code-copy: true    # pulsante per copiare codice
+resources:
+  - png/*

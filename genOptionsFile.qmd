@@ -1,0 +1,110 @@
+---
+title: "Option file Generation"
+format:
+  html:
+    css: custom.css
+    include-after-body: floating-link.html
+---
+
+# 3. OPTION FILE GENERATION
+
+The **mcda.R** script uses an option file in .json format to pick the information on the criteria needed into the analysis (sub-criteria, weights, utility functions, reference points and input data path).
+
+**export_json.R** generates this type of file and can be edited as desired as long as the same criteria names are used into the **mcda.R** script and found as columns in the input .csv files
+
+The reference points follow these criteria:
+- ssb: c(Blim, Bmsy, U_Blim, U_Bmsy)
+  U_Blim is set to 0.1, U_Bmsy is set to 0.99
+  In case of stocks for which biomass indicators are not available the reference points are: c(1/2 Bcurrent, Bcurrent, U_1/2Bcurrent, UBcurrent)
+  U_1/2Bcurrent is set to 0.1, U_Bcurrent is set to 0.5
+
+- f: c(Fmsy, 2Fmsy, U_Fmsy, U_2Fmsy)
+  U_Fmsy is set to 0.99, U_2Fmsy is set to 0.1
+
+- employment, wage, gva, mml, avpb, rbs: c(1/2currentLevel, currentLevel, U_1/2currentLevel, U_currentLevel)
+  U_1/2currentLevel is set to 0.1, U_currentLevel is set to 0.5
+
+- co2: c(noEmissionLvl, currentLvl, U_noEmissionLvl, U_currentLvl)
+  U_noEmissionLvl is set to 0.99, U_currentLvl is set to 0.5
+
+- rsl: c(currentLvl, k_coeff)
+  k is set to 4
+
+Each criterion needs to have an initial *weight*, an utility *function_* from the list below and the related reference points (*ref_points*).
+For criteria with sub-criteria, utilities are calculated at sub-criterion level, thus *function_* and *ref_points* need to be filled for each sub-criterion (filling in *function_* and *ref_points* for the parent criterion won't return error)
+
+ Utilities are calculated based on the utilities functions and reference points assigned to each criteria in the options file.
+ 5 function types are supported:
+ - *logistic2p* logistic growth with 1 reference point:
+    arguments are: (data, x_min, x_max, y(x_min), y(x_max))
+ - *log1p* logarithmic growth with 1 reference point:
+    arguments are: (data, x, y, alpha = 1 (optional)) -> alpha controls the upper asymptote:
+ - *exp1p* exponential growth with 1 reference point:
+    arguments are: (data, x, y);
+ - *negexp1p* negative exponential growth with 1 reference point:
+    arguments are: (data, x, y);
+ - *beta1p* beta growth with 1 reference point and k coefficient controlling the full width at half maximum
+    arguments are: (data, x_at_max_y, k = 4 (optional));
+
+
+**This options file also includes the path to the input file of each criteria loaded into the mcda.R script**
+
+```{r}
+library(jsonlite)
+
+options <- list(
+  criteria = list(
+    ssb = list(
+      weight = 1,
+      sub_criteria = list(
+        HKE = list(weight = 1, function_ = "logistic2p", ref_points = c(800., 2000., 0.1, 0.99)),
+        MUT = list(weight = 1, function_ = "logistic2p", ref_points = c(500., 2000., 0.1, 0.99)),
+        SOL = list(weight = 1, function_ = "logistic2p", ref_points = c(200., 2000., 0.1, 0.99))
+      ),
+      function_ = NULL,
+      ref_points = NULL
+    ),
+    f = list(
+      weight = 1,
+      sub_criteria = list(
+        HKE = list(weight = 1, function_ = "logistic2p", ref_points = c(0.206, 0.412, 0.99, 0.1)),
+        MUT = list(weight = 1, function_ = "logistic2p", ref_points = c(0.37, 0.74, 0.99, 0.1)),
+        SOL = list(weight = 1, function_ = "logistic2p", ref_points = c(0.937, 1.874, 0.99, 0.1))
+      ),
+      function_ = NULL,
+      ref_points = NULL
+    ),
+    empl = list(weight = 1, sub_criteria = NULL, function_ = "logistic2p", ref_points = c(75, 150, 0.1, 0.5)),
+    wage = list(weight = 1, sub_criteria = NULL, function_ = "logistic2p", ref_points = c(750, 1500, 0.1, 0.5)),
+    gva = list(weight = 1, sub_criteria = NULL, function_ = "logistic2p", ref_points = c(9000, 18000, 0.1, 0.5)),
+    rsl = list(weight = 1, sub_criteria = NULL, function_ = "beta1p", ref_points = c(0.5, 4)),
+    co2 = list(weight = 1, sub_criteria = NULL, function_ = "logistic2p", ref_points = c(1, 13, 0.99, 0.5)),
+    mml = list(weight = 1, sub_criteria = NULL, function_ = "logistic2p", ref_points = c(30, 45.5, 0.1, 0.5)),
+    avpb = list(weight = 1, sub_criteria = NULL, function_ = "logistic2p", ref_points = c(275, 550, 0.1, 0.5)),
+    rbs = list(weight = 1, sub_criteria = NULL, function_ = "logistic2p", ref_points = c(0.35, 0.7, 0.1, 0.5))
+  ),
+  data = list(
+    ssb = "data/MCDA_stock_dummy.csv",
+    f = "data/MCDA_stock_dummy.csv",
+    empl = "data/MCDA_dummy.csv",
+    wage = "data/MCDA_dummy.csv",
+    gva = "data/MCDA_dummy.csv",
+    rsl = "data/MCDA_dummy.csv",
+    co2 = "data/MCDA_dummy.csv",
+    mml = "data/MCDA_dummy.csv",
+    avpb = "data/MCDA_dummy.csv",
+    rbs = "data/MCDA_dummy.csv"
+  )
+)
+
+
+
+write_json(options, "data/MCDA_options_dummy.json", pretty = TRUE)
+
+
+```
+
+
+
+
+

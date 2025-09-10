@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>index.qmd/index.html</loc>
+    <lastmod>2025-09-10T09:59:59.354Z</lastmod>
+  </url>
+  <url>
+    <loc>index.qmd/01_Theory.html</loc>
+    <lastmod>2025-09-10T10:02:09.061Z</lastmod>
+  </url>
+  <url>
+    <loc>index.qmd/01_Theory Seawise_example.html</loc>
+    <lastmod>2025-09-10T10:01:39.029Z</lastmod>
+  </url>
+  <url>
+    <loc>index.qmd/02_R-script.html</loc>
+    <lastmod>2025-09-10T10:04:52.300Z</lastmod>
+  </url>
+  <url>
+    <loc>index.qmd/03_Visualization.html</loc>
+    <lastmod>2025-09-09T16:04:53.346Z</lastmod>
+  </url>
+  <url>
+    <loc>index.qmd/InputFileFormat.html</loc>
+    <lastmod>2025-09-09T16:05:16.340Z</lastmod>
+  </url>
+  <url>
+    <loc>index.qmd/genOptionsFile.html</loc>
+    <lastmod>2025-09-09T16:04:57.727Z</lastmod>
+  </url>
+</urlset>

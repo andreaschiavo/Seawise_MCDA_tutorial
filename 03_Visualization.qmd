@@ -1,0 +1,145 @@
+---
+title: "Visualization"
+format:
+    html:
+        css: custom.css
+        include-after-body: floating-link.html
+---
+```{r, message=FALSE, warning=FALSE, error=FALSE, echo = FALSE}
+source("mcda.R")
+
+time_period <- c("2025-2030", "2030-2035", "2035-2040", "2040-2045")
+scenarios <- c("Fmsy_RCP45", "Fmsy_RCP85", "SQ_RCP45", "SQ_RCP85")
+criteria <- c("ssb", "f", "rbs", "mml", "avpb", "empl", "wage", "gva", "rsl", "co2")
+sub_criteria <- list(ssb = c('HKE', 'MUT', 'SOL'),
+                     f = c('HKE', 'MUT', 'SOL'))
+
+mcda <- Mcda(time_period,
+             scenarios,
+             criteria = criteria,
+             sub_criteria = "all",
+             options_file = "data/MCDA_options_dummy.json")
+
+mcda <- load_data(mcda)
+
+mcda <- calculate_utilities(mcda, quantile = 0.5)
+
+mcda <- aggregate_utilities(mcda,
+                            criteria = c('f'), 
+                            label = "combined_f", 
+                            method = "sum", 
+                            set_weight = 1, 
+                            sub_criteria = TRUE, 
+                            weighted = TRUE)
+
+mcda <- aggregate_utilities(mcda,
+                            criteria = c('ssb'), 
+                            label = "combined_ssb", 
+                            method = "sum", 
+                            set_weight = 1, 
+                            sub_criteria = TRUE, 
+                            weighted = TRUE)
+
+# STOCKS
+mcda <- aggregate_utilities(mcda, criteria = c('combined_f', 'combined_ssb'), label = "stocks", method = "sum", set_weight = 1, sub_criteria = FALSE, weighted = TRUE)
+
+# BIODIVERSITY
+mcda <- aggregate_utilities(mcda, criteria = c('mml', 'avpb'), label = "biodiversity", method = "sum", set_weight = 1, sub_criteria = FALSE, weighted = TRUE)
+
+# HABITATS
+mcda <- aggregate_utilities(mcda, criteria = c('rbs'), label = "habitats", method = "sum", set_weight = 1, sub_criteria = FALSE, weighted = TRUE)
+
+# COMMUNITY
+mcda <- aggregate_utilities(mcda, criteria = c('empl', 'rsl', 'wage'), label = "community", method = "sum", set_weight = 1, sub_criteria = FALSE, weighted = TRUE)
+
+# REVENUE
+mcda <- aggregate_utilities(mcda, criteria = c('gva'), label = "revenue", method = "sum", set_weight = 1, sub_criteria = FALSE, weighted = TRUE)
+
+# CLIMATE CHANGE
+mcda <- aggregate_utilities(mcda, criteria = c('co2'), label = "climate change", method = "sum", set_weight = 1, sub_criteria = FALSE, weighted = TRUE)
+
+mcda  <- run_maut(mcda,
+                  criteria = c("stocks", "biodiversity","habitats", "community", "revenue", "climate change")
+)
+
+df = generate_df(
+    mcda,
+    criteria = c("combined_ssb", "combined_f",
+                 "rbs", "mml",
+                 "avpb",
+                 "empl", "wage", "rsl",
+                 "gva",
+                 "co2",
+                 "stocks", "habitats", "biodiversity", "community", "revenue", "climate change"),
+    sub_criteria = c('ssb', 'f'))
+
+# select top or bottom scenarios based on 1 criterion
+tops = top_scenarios(dataframe = df, 
+                     criterion = 'total_utility',
+                     num = 5,
+                     ascending = FALSE)
+
+```
+
+
+3 types of graphs can be generate with this library using the dataframe output from the MCDA analysis:
+
+# 1 Stacked bar chart (*plot_histogram*):
+
+This function generates a stacked bar chart. On the x axis the scenarios, on the y axis the utility values for the criteria of the MCDA.
+*weights* argument is always needed;
+*parents* argument is needed in case *subcriteria* is set to TRUE;
+*scenarios* (default, = NULL) can be passed as a list of scenarios to compare fewer alternatives. If NULL or blank, all    the scenarios included in the MCDA are plotted;
+*subcriteria* (default FALSE) can be set to TRUE to plot the sub-criteria of the criteria passed;
+*color* (default, = "Set3") can be modified with a discrete color palette from **RColorBrewer**;
+
+v.0 notes: when plotting macro-criteria and setting *subcriteria* as TRUE, the legend for the macro-criteria is not visualized
+
+```{r, figures-side, fig.show="hold", out.width="50%"}
+
+plot_histogram(df,
+               criteria = c("stocks", "biodiversity","habitats", "community", "revenue", "climate change"),
+               weights = mcda$weights,
+               parents = mcda$parents,
+               subcriteria = FALSE,
+               facet = TRUE
+               )
+
+
+```
+
+
+### 2 Utility matrix visualization (*plot_matrix*)
+
+This function generates matrix plot. On the x axis the criteria, on the y axis the scenarios, while the color gradient represent the utility values.
+*criteria* (default, = "all") is the list of criteria to plot;
+*scenarios* (default, = "all") is the list of scenarios to plot;
+*color* (default, = "Set3") can be modified with a discrete color palette from **RColorBrewer**;
+*style* (default, = "minimal") set the style of the plot
+
+
+```{r fig.width= 7, fig.height=5}
+
+plot_matrix(df, criteria = c("stocks", "biodiversity","habitats", "community", "revenue", "climate change", "total_utility"),
+            color = "Blues")
+
+```
+
+### 3 Parallel plot (*plot_parallel_graph*)
+
+This function generates a parallel plot. On the x axis the criteria, on the y axis the utilities; the plots connecting the criteria axes are the utilities of the different scenarios.
+
+*criteria* is the list of criteria to plot;
+*highlight* (default, = "top") is the criterion for selecting the highlighted scenarios;
+*top_bottom_criterion* (default, = "total_utility") the criterion for sorting of the top scenarios (this function uses the *top_scenario* function);
+
+v.0 note: only top 5 scenarios sorted by "total_utility" can be highlighted in this version. the idea is to having the possibility to pass a list of scenarios into *highlight* to highlight those in the chart
+
+```{r fig.width= 11, fig.height=6}
+
+plot_parallel_graph(df, criteria = c('combined_ssb', 'combined_f', 'rbs', 'mml', 'avpb', 'empl', 'wage', 'gva','co2', 'rsl'), #
+                    highlight = "top",
+                    top_bottom_criterion = "total_utility")
+
+```
+
