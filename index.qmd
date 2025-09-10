@@ -1,5 +1,5 @@
 ---
-title: "SeaWise WP6.12 Tutorial - MCDA"
+title: "Index"
 author: "Andrea Schiavo"
 date: "September 2025"
 format:
@@ -23,7 +23,7 @@ The tutorial is divided into 3 sections:
 - [Visualization](03_Visualization.html), showcasing the use of 3 buil-in function to plot MCDA results;
 - [Options File](genOptionsFile.html)  , showing the preparation of the options file for the mcda.R script.
 
-For additional information on the Seawise MCDA results consult [SEAwise Report on the impacts of fisheries on stocks and landings under SEAwise EBFM - Garcìa et al. 2025](https:doi.org/10.11583/DTU.29108039)
+For additional information on the Seawise MCDA results consult [SEAwise Report on the impacts of fisheries on stocks and landings under SEAwise EBFM - Garcìa et al. 2025](https://doi.org/10.11583/DTU.29108039)
 
 Visit the [Seawise youtube channel](https://www.youtube.com/@seawiseproject5092) for other courses and tutorials on EBFM methods.
 
