@@ -463,11 +463,11 @@ plot_matrix <- function(df, criteria = "all", scenarios = "all", color = "Blues"
 }
 
 ## Parallel graph
-plot_parallel_graph <- function(df, criteria, highlight = "top", top_bottom_criterion = "total_utility", save = FALSE) {
+plot_parallel_graph <- function(df, criteria, highlight = "top", sort_criterion = "total_utility", save = FALSE) {
   
   ascending <- ifelse(highlight == "top", FALSE, TRUE)
 
-  top_df <- top_scenarios(df, criterion = top_bottom_criterion, num = 5, ascending = ascending)
+  top_df <- top_scenarios(df, criterion = sort_criterion, num = 5, ascending = ascending)
 
   colors <- RColorBrewer::brewer.pal(5, "Set1")
 

@@ -88,20 +88,16 @@ tops = top_scenarios(dataframe = df,
 
 This function generates a stacked bar chart. On the x axis the scenarios, on the y axis the utility values for the criteria of the MCDA.
 *weights* argument is always needed;
-*parents* argument is needed in case *subcriteria* is set to TRUE;
 *scenarios* (default, = NULL) can be passed as a list of scenarios to compare fewer alternatives. If NULL or blank, all    the scenarios included in the MCDA are plotted;
-*subcriteria* (default FALSE) can be set to TRUE to plot the sub-criteria of the criteria passed;
+*facet* (default = TRUE) is used to plot che combination of time-periods, management and climate scenarios. if FALSE, management and climate are merged.
 *color* (default, = "Set3") can be modified with a discrete color palette from **RColorBrewer**;
-
-v.0 notes: when plotting macro-criteria and setting *subcriteria* as TRUE, the legend for the macro-criteria is not visualized
 
 ```{r, figures-side, fig.show="hold", out.width="50%"}
 
 plot_histogram(df,
                criteria = c("stocks", "biodiversity","habitats", "community", "revenue", "climate change"),
+               scenarios = NULL,
                weights = mcda$weights,
-               parents = mcda$parents,
-               subcriteria = FALSE,
                facet = TRUE
                )
 
@@ -139,7 +135,7 @@ v.0 note: only top 5 scenarios sorted by "total_utility" can be highlighted in t
 
 plot_parallel_graph(df, criteria = c('combined_ssb', 'combined_f', 'rbs', 'mml', 'avpb', 'empl', 'wage', 'gva','co2', 'rsl'), #
                     highlight = "top",
-                    top_bottom_criterion = "total_utility")
+                    sort_criterion = "total_utility")
 
 ```
 

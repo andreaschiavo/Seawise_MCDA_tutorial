@@ -224,10 +224,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="input-file-format" class="level1">
 <h1>1. INPUT FILE FORMAT</h1>
-<p>The <strong>mcda.R</strong> script needs a specific input data format that is derived from Seawise model output summary templates. The file is loaded into the script and must have the following structure:</p>
-<p>column1: <em>“time_period”</em>, column2: <em>“scenario”</em>, column3: <em>“quantile”</em>, column4-columnN: <name_of_the_criteria></name_of_the_criteria></p>
+<p>The <strong>mcda.R</strong> script needs a specific input data format and must have the following structure:</p>
+<p>column1: <em>“time_period”</em>, column2: <em>“scenario”</em>, (optional) column3: <em>“other colums(e.g.&nbsp;quantile level)”</em>, column4-columnN: <name_of_the_criteria></name_of_the_criteria></p>
 <p>If one or more criteria have sub_criteria:</p>
-<p>column1: <em>“time_period”</em>, column2: <em>“scenario”</em>, column3: <em>“quantile”</em>, column4 <em>“sub_criteria”</em>, column5-n: <name_of_the_criteria></name_of_the_criteria></p>
+<p>column1: <em>“time_period”</em>, column2: <em>“scenario”</em>, (optional) column3: <em>“quantile level”</em>, column4 <em>“sub_criteria”</em>, column5-n: <name_of_the_criteria></name_of_the_criteria></p>
 <p>column names from 1 to 3/4 cannot be changed as the <strong>mcda.R</strong> script uses them to build the alternatives of the analysis.</p>
 <p><strong>The names of the criteria columns must be the same of the criteria listed in the option file.</strong></p>
 <p><em>time_period and scenario labels must be consistent for all the criteria.</em></p>
@@ -268,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>sub_criteria <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">ssb =</span> <span class="fu">c</span>(<span class="st">'HKE'</span>, <span class="st">'MUT'</span>, <span class="st">'SOL'</span>),</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">f =</span> <span class="fu">c</span>(<span class="st">'HKE'</span>, <span class="st">'MUT'</span>, <span class="st">'SOL'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>A sub_criteria list of lists can be passed to select a subset of the sub-criteria. See the commented-out lines of the code chunk above for reference.</p>
+<p>A sub_criteria list of lists can be passed to select a subset of the sub-criteria.</p>
 </section>
 <section id="initialize-the-mcda-object" class="level1">
 <h1>3 initialize the MCDA object</h1>
@@ -282,13 +282,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="load-input-data-and-calculate-the-utitlity-scores" class="level1">
 <h1>4 load input data and calculate the utitlity scores</h1>
-<p>Load the input data and calculate the utitlities of the critaria based on the MCDA option file (at the bottom of the tutorial you can find the script needed to export the option file .json) Utilities are calculated based on utility functions and reference points defined for each criteria into the options file (see 3.)</p>
+<p>Load the input data and calculate the utitlities of the critaria based on the MCDA option file (see <a href="05_genOptionsFile.html">last section</a>) Utilities are calculated based on utility functions and reference points defined for each criteria into the options file.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mcda <span class="ot">&lt;-</span> <span class="fu">load_data</span>(mcda)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>mcda <span class="ot">&lt;-</span> <span class="fu">calculate_utilities</span>(mcda, <span class="at">quantile =</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>quantile = 0.5 it’s an additional argument (…). It is needed to add a filter to the input data and extract one single value of the criteria for each combination of time-period and management scenario (alternatives). Without this additional argument the function would filter only by time-period and scenario (default filter), returning a dataset with all 3 quantile levels and failing the calculation of the utilities. (At the moment it’s not possible to evaluate all the quantile levels on a single run) To explore the uncertainty of the data it is possible to run multiple analysis with different quantile levels (0.025, 0.5, 0.975) and then concatenate the dataframes (see 1.8 <em>generate_df</em> function)</p>
+<p>quantile = 0.5 it’s an additional argument (…). It is needed to add a filter to the input dataset and extract one single value of the criteria for each combination of time-period and management scenario (alternatives). Without this additional argument the function would filter only by time-period and scenario (default filter), returning a dataset with quantile levels (if present in the dataset) and failing the calculation of the utilities.</p>
 </section>
 <section id="weightings-system" class="level1">
 <h1>5 Weightings system</h1>
@@ -320,8 +320,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><em>gmean</em>: this method performs the geometric mean of the utilities of the criteria passed. If <em>weighted</em> is set to TRUE, the output would be a weighted geometric mean with normalized weights between 0-1.</p></li>
 </ul>
 <p>If a criterion has sub-criteria, these can be aggregated by passing the <em>sub_criteria</em> argument as TRUE. If two criteria that share the same sub-criteria/criterion are passed with <em>sub_criteria</em> = TRUE, they will be combined into a new criterion retaining the same sub-criteria as the original ones.</p>
-<p>One criterion can be passed with <em>sub_criteria</em> = FALSE to generate a new labeled criterion (see 1.7 Habitats aggregation).</p>
-<p><em>set_weight</em> argument is 1 by default. By changing the value of <em>set_weight</em> the weight of the new criterion is set accordingly (but it can be modified later with the function <em>set_weights</em>) (see 1.5)</p>
+<p>One criterion can be passed with <em>sub_criteria</em> = FALSE to generate a new labeled criterion.</p>
+<p><em>set_weight</em> argument is 1 by default. By changing the value of <em>set_weight</em> the weight of the new criterion is set accordingly (but it can be modified later with the function <em>set_weights</em>)</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mcda <span class="ot">&lt;-</span> <span class="fu">aggregate_utilities</span>(mcda,</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">criteria =</span> <span class="fu">c</span>(<span class="st">'f'</span>), </span>
@@ -342,7 +342,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="macro-criteria" class="level2">
 <h2 class="anchored" data-anchor-id="macro-criteria">Macro-criteria</h2>
-<p>Aggregate the criteria into the macro-criteria from the Seawise online tool. Macro-criteria are then passed to the <em>run_maut</em> function. This function runs the Multi-Attribute Utility Theory analysis performing a weighted sum on the passed criteria.</p>
+<p>Aggregate the criteria into the macro-criteria. Macro-criteria are then passed to the <em>run_maut</em> function. This function runs the Multi-Attribute Utility Theory analysis performing a weighted sum on the passed criteria.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># STOCKS</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>mcda <span class="ot">&lt;-</span> <span class="fu">aggregate_utilities</span>(mcda, <span class="at">criteria =</span> <span class="fu">c</span>(<span class="st">'combined_f'</span>, <span class="st">'combined_ssb'</span>), <span class="at">label =</span> <span class="st">"stocks"</span>, <span class="at">method =</span> <span class="st">"sum"</span>, <span class="at">set_weight =</span> <span class="dv">1</span>, <span class="at">sub_criteria =</span> <span class="cn">FALSE</span>, <span class="at">weighted =</span> <span class="cn">TRUE</span>)</span>
@@ -368,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>7 Total utility</h1>
 <p>Now, the total utility is calculated resulting from the combination of the passed macro-criteria, across all the scenarios and time-periods.</p>
 <p>To visualize the outputs, a dataframe can be generated with the function <em>generate_df</em>. It is also possible to extract the utilities of the sub-criteria, by passing the list of criteria carrying those sub-criteria in the <em>sub_criteria</em> argument.</p>
-<p>The function <em>top_scenarios</em> returns a dataframe with a selected number of scenarios (default <em>num</em> = 5), sorted by one selected criterion (<em>criterion</em> = “total_utility”, default), in ascending (<em>ascending</em> = TRUE) or descending (<em>ascending</em> = FALSE, default) order.</p>
+<p>The function <em>top_scenarios</em> returns a dataframe with a selected number of scenarios (default <em>num</em> = 5), sorted by one selected criterion (<em>criterion</em> = “total_utility”, default), in ascending (<em>ascending</em> = TRUE) or descending (<em>ascending</em> = FALSE, default) order. When the <em>facet_cols</em> argument is set to TRUE (=default), the dataframe is generated with separated columns for management scenarios, climate change scenarios and time-period. if is set to FALSE, management and climate change are merged in a single columns.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mcda  <span class="ot">&lt;-</span> <span class="fu">run_maut</span>(mcda,</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">criteria =</span> <span class="fu">c</span>(<span class="st">"stocks"</span>, <span class="st">"biodiversity"</span>,<span class="st">"habitats"</span>, <span class="st">"community"</span>, <span class="st">"revenue"</span>, <span class="st">"climate change"</span>)</span>
@@ -383,15 +383,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"gva"</span>,</span>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"co2"</span>,</span>
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"stocks"</span>, <span class="st">"habitats"</span>, <span class="st">"biodiversity"</span>, <span class="st">"community"</span>, <span class="st">"revenue"</span>, <span class="st">"climate change"</span>),</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">sub_criteria =</span> <span class="fu">c</span>(<span class="st">'ssb'</span>, <span class="st">'f'</span>))</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co"># select top or bottom scenarios based on 1 criterion</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>tops <span class="ot">=</span> <span class="fu">top_scenarios</span>(<span class="at">dataframe =</span> df, </span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>                     <span class="at">criterion =</span> <span class="st">'total_utility'</span>,</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>                     <span class="at">num =</span> <span class="dv">5</span>,</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>                     <span class="at">ascending =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">sub_criteria =</span> <span class="fu">c</span>(<span class="st">'ssb'</span>, <span class="st">'f'</span>),</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet_cols =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co"># select top or bottom scenarios based on 1 criterion</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>tops <span class="ot">=</span> <span class="fu">top_scenarios</span>(<span class="at">dataframe =</span> df, </span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>                     <span class="at">criterion =</span> <span class="st">'total_utility'</span>,</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>                     <span class="at">num =</span> <span class="dv">5</span>,</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>                     <span class="at">ascending =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>To evaluate the uncertainty of the model’s outputs it’s possible to run again the maut analysis from 1.4 on, changing the quantile level into the <em>calculate_utilities</em> function (e.g.: <em>calculate_utilities(mcda, quantile = 0.025)</em> )</p>
 
 
 </section>

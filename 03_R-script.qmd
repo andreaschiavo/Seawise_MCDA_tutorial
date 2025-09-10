@@ -8,14 +8,13 @@ format:
 ---
 # 1. INPUT FILE FORMAT
 
-The **mcda.R** script needs a specific input data format that is derived from Seawise model output summary templates.
-The file is loaded into the script and must have the following structure:
+The **mcda.R** script needs a specific input data format and must have the following structure:
 
-column1: *"time_period"*, column2: *"scenario"*, column3: *"quantile"*, column4-columnN: <name_of_the_criteria>
+column1: *"time_period"*, column2: *"scenario"*, (optional) column3: *"other colums(e.g. quantile level)"*, column4-columnN: <name_of_the_criteria>
 
 If one or more criteria have sub_criteria:
 
-column1: *"time_period"*, column2: *"scenario"*, column3: *"quantile"*, column4 *"sub_criteria"*, column5-n: <name_of_the_criteria>
+column1: *"time_period"*, column2: *"scenario"*, (optional) column3: *"quantile level"*, column4 *"sub_criteria"*, column5-n: <name_of_the_criteria>
 
 column names from 1 to 3/4 cannot be changed as the **mcda.R** script uses them to build the alternatives of the analysis.
 
@@ -52,7 +51,7 @@ sub_criteria <- list(ssb = c('HKE', 'MUT', 'SOL'),
                      f = c('HKE', 'MUT', 'SOL'))
 
 ```
-A sub_criteria list of lists can be passed to select a subset of the sub-criteria. See the commented-out lines of the code chunk above for reference.
+A sub_criteria list of lists can be passed to select a subset of the sub-criteria.
 
 
 # 3 initialize the MCDA object
@@ -69,8 +68,8 @@ mcda <- Mcda(time_period,
 
 # 4 load input data and calculate the utitlity scores
 
-Load the input data and calculate the utitlities of the critaria based on the MCDA option file (at the bottom of the tutorial you can find the script needed to export the option file .json)
-Utilities are calculated based on utility functions and reference points defined for each criteria into the options file (see 3.)
+Load the input data and calculate the utitlities of the critaria based on the MCDA option file (see [last section](05_genOptionsFile.html))
+Utilities are calculated based on utility functions and reference points defined for each criteria into the options file.
 
 ```{r, echo = TRUE}
 
@@ -81,8 +80,7 @@ mcda <- calculate_utilities(mcda, quantile = 0.5)
 ```
 
 quantile = 0.5 it's an additional argument (...). 
-It is needed to add a filter to the input data and extract one single value of the criteria for each combination of time-period and management scenario (alternatives). Without this additional argument the function would filter only by time-period and scenario (default filter), returning a dataset with all 3 quantile levels and failing the calculation of the utilities. (At the moment it's not possible to evaluate all the quantile levels on a single run)
- To explore the uncertainty of the data it is possible to run multiple analysis with different quantile levels (0.025, 0.5, 0.975) and then concatenate the dataframes (see 1.8 *generate_df* function)
+It is needed to add a filter to the input dataset and extract one single value of the criteria for each combination of time-period and management scenario (alternatives). Without this additional argument the function would filter only by time-period and scenario (default filter), returning a dataset with quantile levels (if present in the dataset) and failing the calculation of the utilities.
 
 
 # 5 Weightings system
@@ -124,9 +122,9 @@ two methods are implemented:
 If a criterion has sub-criteria, these can be aggregated by passing the *sub_criteria* argument as TRUE.
 If two criteria that share the same sub-criteria/criterion are passed with *sub_criteria* = TRUE, they will be combined into a new criterion retaining the same sub-criteria as the original ones.
 
-One criterion can be passed with *sub_criteria* = FALSE to generate a new labeled criterion (see 1.7 Habitats aggregation).
+One criterion can be passed with *sub_criteria* = FALSE to generate a new labeled criterion.
 
-*set_weight* argument is 1 by default. By changing the value of *set_weight* the weight of the new criterion is set accordingly (but it can be modified later with the function *set_weights*) (see 1.5)
+*set_weight* argument is 1 by default. By changing the value of *set_weight* the weight of the new criterion is set accordingly (but it can be modified later with the function *set_weights*)
 
 
 
@@ -152,7 +150,7 @@ mcda <- aggregate_utilities(mcda,
 
 ## Macro-criteria
 
-Aggregate the criteria into the macro-criteria from the Seawise online tool. Macro-criteria are then passed to the *run_maut* function.
+Aggregate the criteria into the macro-criteria. Macro-criteria are then passed to the *run_maut* function.
 This function runs the Multi-Attribute Utility Theory analysis performing a weighted sum on the passed criteria.
 
 
@@ -185,7 +183,7 @@ Now, the total utility is calculated resulting from the combination of the passe
 To visualize the outputs, a dataframe can be generated with the function *generate_df*.
 It is also possible to extract the utilities of the sub-criteria, by passing the list of criteria carrying those sub-criteria in the *sub_criteria* argument.
 
-The function *top_scenarios* returns a dataframe with a selected number of scenarios (default *num* = 5), sorted by one selected criterion (*criterion* = "total_utility", default), in ascending (*ascending* = TRUE) or descending (*ascending* = FALSE, default) order.
+The function *top_scenarios* returns a dataframe with a selected number of scenarios (default *num* = 5), sorted by one selected criterion (*criterion* = "total_utility", default), in ascending (*ascending* = TRUE) or descending (*ascending* = FALSE, default) order. When the *facet_cols* argument is set to TRUE (=default), the dataframe is generated with separated columns for management scenarios, climate change scenarios and time-period. if is set to FALSE, management and climate change are merged in a single columns.
 
 ```{r, echo = TRUE}
 
@@ -202,7 +200,8 @@ df = generate_df(
                  "gva",
                  "co2",
                  "stocks", "habitats", "biodiversity", "community", "revenue", "climate change"),
-    sub_criteria = c('ssb', 'f'))
+    sub_criteria = c('ssb', 'f'),
+    facet_cols = TRUE)
 
 # select top or bottom scenarios based on 1 criterion
 tops = top_scenarios(dataframe = df, 
@@ -212,6 +211,5 @@ tops = top_scenarios(dataframe = df,
 
 ```
 
-To evaluate the uncertainty of the model's outputs it's possible to run again the maut analysis from 1.4 on, changing the quantile level into the *calculate_utilities* function (e.g.: *calculate_utilities(mcda, quantile = 0.025)* )
 
 

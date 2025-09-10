@@ -217,16 +217,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>3 types of graphs can be generate with this library using the dataframe output from the MCDA analysis:</p>
 <section id="stacked-bar-chart-plot_histogram" class="level1">
 <h1>1. Stacked bar chart (<em>plot_histogram</em>):</h1>
-<p>This function generates a stacked bar chart. On the x axis the scenarios, on the y axis the utility values for the criteria of the MCDA. <em>weights</em> argument is always needed; <em>parents</em> argument is needed in case <em>subcriteria</em> is set to TRUE; <em>scenarios</em> (default, = NULL) can be passed as a list of scenarios to compare fewer alternatives. If NULL or blank, all the scenarios included in the MCDA are plotted; <em>subcriteria</em> (default FALSE) can be set to TRUE to plot the sub-criteria of the criteria passed; <em>color</em> (default, = “Set3”) can be modified with a discrete color palette from <strong>RColorBrewer</strong>;</p>
-<p>v.0 notes: when plotting macro-criteria and setting <em>subcriteria</em> as TRUE, the legend for the macro-criteria is not visualized</p>
+<p>This function generates a stacked bar chart. On the x axis the scenarios, on the y axis the utility values for the criteria of the MCDA. <em>weights</em> argument is always needed; <em>scenarios</em> (default, = NULL) can be passed as a list of scenarios to compare fewer alternatives. If NULL or blank, all the scenarios included in the MCDA are plotted; <em>facet</em> (default = TRUE) is used to plot che combination of time-periods, management and climate scenarios. if FALSE, management and climate are merged. <em>color</em> (default, = “Set3”) can be modified with a discrete color palette from <strong>RColorBrewer</strong>;</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_histogram</span>(df,</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">criteria =</span> <span class="fu">c</span>(<span class="st">"stocks"</span>, <span class="st">"biodiversity"</span>,<span class="st">"habitats"</span>, <span class="st">"community"</span>, <span class="st">"revenue"</span>, <span class="st">"climate change"</span>),</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">weights =</span> mcda<span class="sc">$</span>weights,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">parents =</span> mcda<span class="sc">$</span>parents,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">subcriteria =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">facet =</span> <span class="cn">TRUE</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>               )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">scenarios =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">weights =</span> mcda<span class="sc">$</span>weights,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">facet =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>               )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -259,7 +257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_parallel_graph</span>(df, <span class="at">criteria =</span> <span class="fu">c</span>(<span class="st">'combined_ssb'</span>, <span class="st">'combined_f'</span>, <span class="st">'rbs'</span>, <span class="st">'mml'</span>, <span class="st">'avpb'</span>, <span class="st">'empl'</span>, <span class="st">'wage'</span>, <span class="st">'gva'</span>,<span class="st">'co2'</span>, <span class="st">'rsl'</span>), <span class="co">#</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">highlight =</span> <span class="st">"top"</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">top_bottom_criterion =</span> <span class="st">"total_utility"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">sort_criterion =</span> <span class="st">"total_utility"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">

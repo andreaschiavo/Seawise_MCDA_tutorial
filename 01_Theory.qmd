@@ -43,9 +43,10 @@ The main steps of MAUT are the following:
  - aggregating weighted utilities into a composite score representing the overall performance of a scenario;
  - comparing scenarios in terms of overall performance.
 
-<p align="center">
+*img here*
+<!-- <p align="center">
   <img src="png/maut.png" width="60%"/>
-</p>
+</p> -->
 
 ## Utility scores
 
