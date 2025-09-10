@@ -44,7 +44,7 @@ The main steps of MAUT are the following:
  - comparing scenarios in terms of overall performance.
 
 <p align="center">
-  <img src="png/maut.png" width="100%"/>
+  <img src="png/maut.png" width="60%"/>
 </p>
 
 ## Utility scores

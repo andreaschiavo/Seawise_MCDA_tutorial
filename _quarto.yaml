@@ -8,7 +8,7 @@ book:
   chapters:
     - index.qmd
     - 01_Theory.qmd
-    - 02_Theory Seawise_example.qmd
+    - 02_Theory_Seawise_example.qmd
     - 03_R-script.qmd
     - 04_Visualization.qmd
     - 05_genOptionsFile.qmd
