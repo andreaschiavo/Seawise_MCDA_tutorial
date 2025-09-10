@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Andrea Schiavo">
-<meta name="dcterms.date" content="2025-09-01">
 
-<title>SEAwise Tutorial WP6: Multi-Criteria Decision Analysis</title>
+<title>Seawise MCDA example – SEAwise Tutorial WP6: Multi-Criteria Decision Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01_Theory.html" rel="next">
+<link href="./02_R-script.html" rel="next">
+<link href="./01_Theory.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -43,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-1fe81d0376b2c50856e68e651e390326.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-f2c6d6e2b784ddc5de38779acc06f37d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-0b984170a42629a489084289cb1ad9fe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -71,6 +70,10 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
 
 
 <link rel="stylesheet" href="custom.css">
@@ -85,7 +88,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-title">SeaWise WP6.12 Tutorial - MCDA</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_Theory Seawise_example.html"><span class="chapter-title">Seawise MCDA example</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -114,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">SeaWise WP6.12 Tutorial - MCDA</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">SeaWise WP6.12 Tutorial - MCDA</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -124,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01_Theory Seawise_example.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Seawise MCDA example</span></a>
+  <a href="./01_Theory Seawise_example.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Seawise MCDA example</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -135,11 +138,6 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03_Visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Visualization</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./InputFileFormat.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Input file</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -158,26 +156,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">SEAwise Tutorial WP6: Multi-Criteria Decision Analysis</h1>
+<h1 class="title"><span class="chapter-title">Seawise MCDA example</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Andrea Schiavo </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">September 1, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -187,20 +173,81 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="welcome" class="level1">
-<h1>Welcome</h1>
-<p>This is a tutorial to run a MCDA analysis on the output of the models from Seawise H2020 project case studies. The tutorial is divided into 3 sections:</p>
-<ul>
-<li><a href="01_Theory.html">Multi-Criteria Decision Analysis concept</a>, what is MCDA? what are possible applications? what has been done in Seawise?;</li>
-<li><a href="./01_Theory Seawise_example.html">Seawise MCDA example</a>, briefly introducing the approach adopted in the Seawise project;</li>
-<li><a href="02_R-script.html">R-script</a>, displaying a trial of the <em>mcda.R</em> script developed within the Seawise project;</li>
-<li><a href="03_Visualization.html">Visualization</a>, showcasing the use of 3 buil-in function to plot MCDA results;</li>
-<li><a href="InputFileFormat.html">Input File Format</a>, showing the preparation of input files for the mcda.R script;<br>
-</li>
-<li><a href="genOptionsFile.html">Options File</a> , showing the preparation of the options file for the mcda.R script.</li>
-</ul>
-<p>For additional information on the Seawise MCDA results consult <a href="https:doi.org/10.11583/DTU.29108039">SEAwise Report on the impacts of fisheries on stocks and landings under SEAwise EBFM - Garcìa et al.&nbsp;2025</a></p>
-<p>Visit the <a href="https://www.youtube.com/@seawiseproject5092">Seawise youtube channel</a> for other courses and tutorials on EBFM methods.</p>
+<section id="criteria" class="level1">
+<h1>Criteria</h1>
+<p>In Seawise, we identified six macro-criteria, each corresponding to a management criteria: conserving stocks, conserving biodiversity, conserving habitats, mitigating climate change, sustaining communities, and ensuring economic viability.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Macro_criterion</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Attribute</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td rowspan="2" style="text-align: left; vertical-align: top !important;">Conserving stocks</td>
+<td style="text-align: left;">Spawning Stock Biomass (SSB)</td>
+<td style="text-align: left;">t</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fishing mortality (F)</td>
+<td style="text-align: left;">yr–1</td>
+</tr>
+<tr class="odd">
+<td rowspan="2" style="text-align: left; vertical-align: top !important;">Conserving biodiversity</td>
+<td style="text-align: left;">Mean maximum length across trophic guilds (MML)</td>
+<td style="text-align: left;">cm</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Apex vertebrate predator biomass (AVPB)</td>
+<td style="text-align: left;">t</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Conserving habitats</td>
+<td style="text-align: left;">Relative benthic state (RBS)</td>
+<td style="text-align: left;">% area with RBS≥0.8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mitigating climate change</td>
+<td style="text-align: left;">CO2 emissions per unit catch (CO2)</td>
+<td style="text-align: left;">tCO2 / kg</td>
+</tr>
+<tr class="odd">
+<td rowspan="3" style="text-align: left; vertical-align: top !important;">Sustaining communities</td>
+<td style="text-align: left;">Wage (WAGE)</td>
+<td style="text-align: left;">€</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Employment (EMPL)</td>
+<td style="text-align: left;">FTE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ratio between small and large scale fishery landing value (RSL)</td>
+<td style="text-align: left;">--</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ensuring economic viability</td>
+<td style="text-align: left;">Gross value added (GVA)</td>
+<td style="text-align: left;">€</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="utility-funcitons-and-reference-points" class="level1">
+<h1>Utility funcitons and reference points</h1>
+<p>For every indicator, we defined a utility function that maps its value to a range between zero — representing minimum satisfaction — and one — representing maximum satisfaction. Utility functions incorporated reference points whenever available; otherwise, the current value of the indicator served as a baseline.</p>
+<p align="center">
+<img src="png/utility_F.png" width="45%"> <img src="png/utility_SSB_Bcurrent.png" width="45%"> <img src="png/utility_employment.png" width="45%"> <img src="png/utility_RSL.png" width="45%">
+</p>
+</section>
+<section id="alternativesscenarios" class="level1">
+<h1>Alternatives/Scenarios</h1>
+<p>We defined a number of scenarios based on the combination of time periods, climatic projections and management strategies.</p>
 
 
 </section>
@@ -247,14 +294,6 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
 });
-
-</script>
-
-<script>
-
-  // aggiunge la classe homepage al body
-
-  document.body.classList.add("homepage");
 
 </script>
 
@@ -660,10 +699,13 @@ document.addEventListener("DOMContentLoaded", function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./01_Theory.html" class="pagination-link" aria-label="Multi-Criteria Decision Analysis (MCDA)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Multi-Criteria Decision Analysis (MCDA)</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_Theory.html" class="pagination-link" aria-label="Multi-Criteria Decision Analysis (MCDA)">
-        <span class="nav-page-text"><span class="chapter-title">Multi-Criteria Decision Analysis (MCDA)</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./02_R-script.html" class="pagination-link" aria-label="R-script">
+        <span class="nav-page-text"><span class="chapter-title">R-script</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

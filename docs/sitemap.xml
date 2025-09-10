@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>index.qmd/index.html</loc>
-    <lastmod>2025-09-10T09:59:59.354Z</lastmod>
+    <lastmod>2025-09-10T10:11:37.427Z</lastmod>
   </url>
   <url>
     <loc>index.qmd/01_Theory.html</loc>
@@ -19,10 +19,6 @@
   <url>
     <loc>index.qmd/03_Visualization.html</loc>
     <lastmod>2025-09-09T16:04:53.346Z</lastmod>
-  </url>
-  <url>
-    <loc>index.qmd/InputFileFormat.html</loc>
-    <lastmod>2025-09-09T16:05:16.340Z</lastmod>
   </url>
   <url>
     <loc>index.qmd/genOptionsFile.html</loc>

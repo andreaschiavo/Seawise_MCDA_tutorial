@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Option file Generation – SEAwise Tutorial WP6: Multi-Criteria Decision Analysis</title>
+<title>Visualization – SEAwise Tutorial WP6: Multi-Criteria Decision Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./InputFileFormat.html" rel="prev">
+<link href="./genOptionsFile.html" rel="next">
+<link href="./02_R-script.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -118,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./genOptionsFile.html"><span class="chapter-title">Option file Generation</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03_Visualization.html"><span class="chapter-title">Visualization</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -167,17 +168,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_Visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Visualization</span></a>
+  <a href="./03_Visualization.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Visualization</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./InputFileFormat.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Input file</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./genOptionsFile.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Option file Generation</span></a>
+  <a href="./genOptionsFile.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Option file Generation</span></a>
   </div>
 </li>
     </ul>
@@ -190,7 +186,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#option-file-generation" id="toc-option-file-generation" class="nav-link active" data-scroll-target="#option-file-generation">3. OPTION FILE GENERATION</a></li>
+  <li><a href="#stacked-bar-chart-plot_histogram" id="toc-stacked-bar-chart-plot_histogram" class="nav-link active" data-scroll-target="#stacked-bar-chart-plot_histogram">1 Stacked bar chart (<em>plot_histogram</em>):</a>
+  <ul class="collapse">
+  <li><a href="#utility-matrix-visualization-plot_matrix" id="toc-utility-matrix-visualization-plot_matrix" class="nav-link" data-scroll-target="#utility-matrix-visualization-plot_matrix">2 Utility matrix visualization (<em>plot_matrix</em>)</a></li>
+  <li><a href="#parallel-plot-plot_parallel_graph" id="toc-parallel-plot-plot_parallel_graph" class="nav-link" data-scroll-target="#parallel-plot-plot_parallel_graph">3 Parallel plot (<em>plot_parallel_graph</em>)</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -199,7 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Option file Generation</span></h1>
+<h1 class="title"><span class="chapter-title">Visualization</span></h1>
 </div>
 
 
@@ -216,74 +216,62 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="option-file-generation" class="level1">
-<h1>3. OPTION FILE GENERATION</h1>
-<p>The <strong>mcda.R</strong> script uses an option file in .json format to pick the information on the criteria needed into the analysis (sub-criteria, weights, utility functions, reference points and input data path).</p>
-<p><strong>export_json.R</strong> generates this type of file and can be edited as desired as long as the same criteria names are used into the <strong>mcda.R</strong> script and found as columns in the input .csv files</p>
-<p>The reference points follow these criteria: - ssb: c(Blim, Bmsy, U_Blim, U_Bmsy) U_Blim is set to 0.1, U_Bmsy is set to 0.99 In case of stocks for which biomass indicators are not available the reference points are: c(1/2 Bcurrent, Bcurrent, U_1/2Bcurrent, UBcurrent) U_1/2Bcurrent is set to 0.1, U_Bcurrent is set to 0.5</p>
-<ul>
-<li><p>f: c(Fmsy, 2Fmsy, U_Fmsy, U_2Fmsy) U_Fmsy is set to 0.99, U_2Fmsy is set to 0.1</p></li>
-<li><p>employment, wage, gva, mml, avpb, rbs: c(1/2currentLevel, currentLevel, U_1/2currentLevel, U_currentLevel) U_1/2currentLevel is set to 0.1, U_currentLevel is set to 0.5</p></li>
-<li><p>co2: c(noEmissionLvl, currentLvl, U_noEmissionLvl, U_currentLvl) U_noEmissionLvl is set to 0.99, U_currentLvl is set to 0.5</p></li>
-<li><p>rsl: c(currentLvl, k_coeff) k is set to 4</p></li>
-</ul>
-<p>Each criterion needs to have an initial <em>weight</em>, an utility <em>function_</em> from the list below and the related reference points (<em>ref_points</em>). For criteria with sub-criteria, utilities are calculated at sub-criterion level, thus <em>function_</em> and <em>ref_points</em> need to be filled for each sub-criterion (filling in <em>function_</em> and <em>ref_points</em> for the parent criterion won’t return error)</p>
-<p>Utilities are calculated based on the utilities functions and reference points assigned to each criteria in the options file. 5 function types are supported: - <em>logistic2p</em> logistic growth with 1 reference point: arguments are: (data, x_min, x_max, y(x_min), y(x_max)) - <em>log1p</em> logarithmic growth with 1 reference point: arguments are: (data, x, y, alpha = 1 (optional)) -&gt; alpha controls the upper asymptote: - <em>exp1p</em> exponential growth with 1 reference point: arguments are: (data, x, y); - <em>negexp1p</em> negative exponential growth with 1 reference point: arguments are: (data, x, y); - <em>beta1p</em> beta growth with 1 reference point and k coefficient controlling the full width at half maximum arguments are: (data, x_at_max_y, k = 4 (optional));</p>
-<p><strong>This options file also includes the path to the input file of each criteria loaded into the mcda.R script</strong></p>
+<p>3 types of graphs can be generate with this library using the dataframe output from the MCDA analysis:</p>
+<section id="stacked-bar-chart-plot_histogram" class="level1">
+<h1>1 Stacked bar chart (<em>plot_histogram</em>):</h1>
+<p>This function generates a stacked bar chart. On the x axis the scenarios, on the y axis the utility values for the criteria of the MCDA. <em>weights</em> argument is always needed; <em>parents</em> argument is needed in case <em>subcriteria</em> is set to TRUE; <em>scenarios</em> (default, = NULL) can be passed as a list of scenarios to compare fewer alternatives. If NULL or blank, all the scenarios included in the MCDA are plotted; <em>subcriteria</em> (default FALSE) can be set to TRUE to plot the sub-criteria of the criteria passed; <em>color</em> (default, = “Set3”) can be modified with a discrete color palette from <strong>RColorBrewer</strong>;</p>
+<p>v.0 notes: when plotting macro-criteria and setting <em>subcriteria</em> as TRUE, the legend for the macro-criteria is not visualized</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>options <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">criteria =</span> <span class="fu">list</span>(</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">ssb =</span> <span class="fu">list</span>(</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">weight =</span> <span class="dv">1</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">sub_criteria =</span> <span class="fu">list</span>(</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">HKE =</span> <span class="fu">list</span>(<span class="at">weight =</span> <span class="dv">1</span>, <span class="at">function_ =</span> <span class="st">"logistic2p"</span>, <span class="at">ref_points =</span> <span class="fu">c</span>(<span class="fl">800.</span>, <span class="fl">2000.</span>, <span class="fl">0.1</span>, <span class="fl">0.99</span>)),</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">MUT =</span> <span class="fu">list</span>(<span class="at">weight =</span> <span class="dv">1</span>, <span class="at">function_ =</span> <span class="st">"logistic2p"</span>, <span class="at">ref_points =</span> <span class="fu">c</span>(<span class="fl">500.</span>, <span class="fl">2000.</span>, <span class="fl">0.1</span>, <span class="fl">0.99</span>)),</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">SOL =</span> <span class="fu">list</span>(<span class="at">weight =</span> <span class="dv">1</span>, <span class="at">function_ =</span> <span class="st">"logistic2p"</span>, <span class="at">ref_points =</span> <span class="fu">c</span>(<span class="fl">200.</span>, <span class="fl">2000.</span>, <span class="fl">0.1</span>, <span class="fl">0.99</span>))</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">function_ =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">ref_points =</span> <span class="cn">NULL</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">f =</span> <span class="fu">list</span>(</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">weight =</span> <span class="dv">1</span>,</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">sub_criteria =</span> <span class="fu">list</span>(</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">HKE =</span> <span class="fu">list</span>(<span class="at">weight =</span> <span class="dv">1</span>, <span class="at">function_ =</span> <span class="st">"logistic2p"</span>, <span class="at">ref_points =</span> <span class="fu">c</span>(<span class="fl">0.206</span>, <span class="fl">0.412</span>, <span class="fl">0.99</span>, <span class="fl">0.1</span>)),</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">MUT =</span> <span class="fu">list</span>(<span class="at">weight =</span> <span class="dv">1</span>, <span class="at">function_ =</span> <span class="st">"logistic2p"</span>, <span class="at">ref_points =</span> <span class="fu">c</span>(<span class="fl">0.37</span>, <span class="fl">0.74</span>, <span class="fl">0.99</span>, <span class="fl">0.1</span>)),</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">SOL =</span> <span class="fu">list</span>(<span class="at">weight =</span> <span class="dv">1</span>, <span class="at">function_ =</span> <span class="st">"logistic2p"</span>, <span class="at">ref_points =</span> <span class="fu">c</span>(<span class="fl">0.937</span>, <span class="fl">1.874</span>, <span class="fl">0.99</span>, <span class="fl">0.1</span>))</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">function_ =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">ref_points =</span> <span class="cn">NULL</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">empl =</span> <span class="fu">list</span>(<span class="at">weight =</span> <span class="dv">1</span>, <span class="at">sub_criteria =</span> <span class="cn">NULL</span>, <span class="at">function_ =</span> <span class="st">"logistic2p"</span>, <span class="at">ref_points =</span> <span class="fu">c</span>(<span class="dv">75</span>, <span class="dv">150</span>, <span class="fl">0.1</span>, <span class="fl">0.5</span>)),</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">wage =</span> <span class="fu">list</span>(<span class="at">weight =</span> <span class="dv">1</span>, <span class="at">sub_criteria =</span> <span class="cn">NULL</span>, <span class="at">function_ =</span> <span class="st">"logistic2p"</span>, <span class="at">ref_points =</span> <span class="fu">c</span>(<span class="dv">750</span>, <span class="dv">1500</span>, <span class="fl">0.1</span>, <span class="fl">0.5</span>)),</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">gva =</span> <span class="fu">list</span>(<span class="at">weight =</span> <span class="dv">1</span>, <span class="at">sub_criteria =</span> <span class="cn">NULL</span>, <span class="at">function_ =</span> <span class="st">"logistic2p"</span>, <span class="at">ref_points =</span> <span class="fu">c</span>(<span class="dv">9000</span>, <span class="dv">18000</span>, <span class="fl">0.1</span>, <span class="fl">0.5</span>)),</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">rsl =</span> <span class="fu">list</span>(<span class="at">weight =</span> <span class="dv">1</span>, <span class="at">sub_criteria =</span> <span class="cn">NULL</span>, <span class="at">function_ =</span> <span class="st">"beta1p"</span>, <span class="at">ref_points =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">4</span>)),</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">co2 =</span> <span class="fu">list</span>(<span class="at">weight =</span> <span class="dv">1</span>, <span class="at">sub_criteria =</span> <span class="cn">NULL</span>, <span class="at">function_ =</span> <span class="st">"logistic2p"</span>, <span class="at">ref_points =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">13</span>, <span class="fl">0.99</span>, <span class="fl">0.5</span>)),</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">mml =</span> <span class="fu">list</span>(<span class="at">weight =</span> <span class="dv">1</span>, <span class="at">sub_criteria =</span> <span class="cn">NULL</span>, <span class="at">function_ =</span> <span class="st">"logistic2p"</span>, <span class="at">ref_points =</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="fl">45.5</span>, <span class="fl">0.1</span>, <span class="fl">0.5</span>)),</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">avpb =</span> <span class="fu">list</span>(<span class="at">weight =</span> <span class="dv">1</span>, <span class="at">sub_criteria =</span> <span class="cn">NULL</span>, <span class="at">function_ =</span> <span class="st">"logistic2p"</span>, <span class="at">ref_points =</span> <span class="fu">c</span>(<span class="dv">275</span>, <span class="dv">550</span>, <span class="fl">0.1</span>, <span class="fl">0.5</span>)),</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">rbs =</span> <span class="fu">list</span>(<span class="at">weight =</span> <span class="dv">1</span>, <span class="at">sub_criteria =</span> <span class="cn">NULL</span>, <span class="at">function_ =</span> <span class="st">"logistic2p"</span>, <span class="at">ref_points =</span> <span class="fu">c</span>(<span class="fl">0.35</span>, <span class="fl">0.7</span>, <span class="fl">0.1</span>, <span class="fl">0.5</span>))</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">ssb =</span> <span class="st">"data/MCDA_stock_dummy.csv"</span>,</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">f =</span> <span class="st">"data/MCDA_stock_dummy.csv"</span>,</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">empl =</span> <span class="st">"data/MCDA_dummy.csv"</span>,</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">wage =</span> <span class="st">"data/MCDA_dummy.csv"</span>,</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">gva =</span> <span class="st">"data/MCDA_dummy.csv"</span>,</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">rsl =</span> <span class="st">"data/MCDA_dummy.csv"</span>,</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">co2 =</span> <span class="st">"data/MCDA_dummy.csv"</span>,</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">mml =</span> <span class="st">"data/MCDA_dummy.csv"</span>,</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">avpb =</span> <span class="st">"data/MCDA_dummy.csv"</span>,</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">rbs =</span> <span class="st">"data/MCDA_dummy.csv"</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="fu">write_json</span>(options, <span class="st">"data/MCDA_options_dummy.json"</span>, <span class="at">pretty =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_histogram</span>(df,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">criteria =</span> <span class="fu">c</span>(<span class="st">"stocks"</span>, <span class="st">"biodiversity"</span>,<span class="st">"habitats"</span>, <span class="st">"community"</span>, <span class="st">"revenue"</span>, <span class="st">"climate change"</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">weights =</span> mcda<span class="sc">$</span>weights,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">parents =</span> mcda<span class="sc">$</span>parents,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">subcriteria =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">facet =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>               )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_Visualization_files/figure-html/figures-side-1.png" class="img-fluid figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="utility-matrix-visualization-plot_matrix" class="level3">
+<h3 class="anchored" data-anchor-id="utility-matrix-visualization-plot_matrix">2 Utility matrix visualization (<em>plot_matrix</em>)</h3>
+<p>This function generates matrix plot. On the x axis the criteria, on the y axis the scenarios, while the color gradient represent the utility values. <em>criteria</em> (default, = “all”) is the list of criteria to plot; <em>scenarios</em> (default, = “all”) is the list of scenarios to plot; <em>color</em> (default, = “Set3”) can be modified with a discrete color palette from <strong>RColorBrewer</strong>; <em>style</em> (default, = “minimal”) set the style of the plot</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_matrix</span>(df, <span class="at">criteria =</span> <span class="fu">c</span>(<span class="st">"stocks"</span>, <span class="st">"biodiversity"</span>,<span class="st">"habitats"</span>, <span class="st">"community"</span>, <span class="st">"revenue"</span>, <span class="st">"climate change"</span>, <span class="st">"total_utility"</span>),</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"Blues"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_Visualization_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="parallel-plot-plot_parallel_graph" class="level3">
+<h3 class="anchored" data-anchor-id="parallel-plot-plot_parallel_graph">3 Parallel plot (<em>plot_parallel_graph</em>)</h3>
+<p>This function generates a parallel plot. On the x axis the criteria, on the y axis the utilities; the plots connecting the criteria axes are the utilities of the different scenarios.</p>
+<p><em>criteria</em> is the list of criteria to plot; <em>highlight</em> (default, = “top”) is the criterion for selecting the highlighted scenarios; <em>top_bottom_criterion</em> (default, = “total_utility”) the criterion for sorting of the top scenarios (this function uses the <em>top_scenario</em> function);</p>
+<p>v.0 note: only top 5 scenarios sorted by “total_utility” can be highlighted in this version. the idea is to having the possibility to pass a list of scenarios into <em>highlight</em> to highlight those in the chart</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_parallel_graph</span>(df, <span class="at">criteria =</span> <span class="fu">c</span>(<span class="st">'combined_ssb'</span>, <span class="st">'combined_f'</span>, <span class="st">'rbs'</span>, <span class="st">'mml'</span>, <span class="st">'avpb'</span>, <span class="st">'empl'</span>, <span class="st">'wage'</span>, <span class="st">'gva'</span>,<span class="st">'co2'</span>, <span class="st">'rsl'</span>), <span class="co">#</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">highlight =</span> <span class="st">"top"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">top_bottom_criterion =</span> <span class="st">"total_utility"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_Visualization_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="1056"></p>
+</figure>
+</div>
+</div>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -733,11 +721,14 @@ document.addEventListener("DOMContentLoaded", function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./InputFileFormat.html" class="pagination-link" aria-label="Input file">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Input file</span></span>
+      <a href="./02_R-script.html" class="pagination-link" aria-label="R-script">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">R-script</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./genOptionsFile.html" class="pagination-link" aria-label="Option file Generation">
+        <span class="nav-page-text"><span class="chapter-title">Option file Generation</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

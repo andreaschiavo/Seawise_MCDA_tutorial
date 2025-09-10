@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Seawise MCDA example – SEAwise Tutorial WP6: Multi-Criteria Decision Analysis</title>
+<title>Multi-Criteria Decision Analysis (MCDA) – SEAwise Tutorial WP6: Multi-Criteria Decision Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./02_R-script.html" rel="next">
-<link href="./01_Theory.html" rel="prev">
+<link href="./01_Theory Seawise_example.html" rel="next">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -70,10 +70,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
-
-<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-
 
 
 <link rel="stylesheet" href="custom.css">
@@ -88,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_Theory Seawise_example.html"><span class="chapter-title">Seawise MCDA example</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_Theory.html"><span class="chapter-title">Multi-Criteria Decision Analysis (MCDA)</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -122,12 +118,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01_Theory.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multi-Criteria Decision Analysis (MCDA)</span></a>
+  <a href="./01_Theory.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Multi-Criteria Decision Analysis (MCDA)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01_Theory Seawise_example.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Seawise MCDA example</span></a>
+  <a href="./01_Theory Seawise_example.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Seawise MCDA example</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -138,11 +134,6 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03_Visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Visualization</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./InputFileFormat.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Input file</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -161,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Seawise MCDA example</span></h1>
+<h1 class="title"><span class="chapter-title">Multi-Criteria Decision Analysis (MCDA)</span></h1>
 </div>
 
 
@@ -178,83 +169,48 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="criteria" class="level1">
-<h1>Criteria</h1>
-<p>In Seawise, we identified six macro-criteria, each corresponding to a management criteria: conserving stocks, conserving biodiversity, conserving habitats, mitigating climate change, sustaining communities, and ensuring economic viability.</p>
-<div class="cell">
-<div class="cell-output-display">
-<table class="table caption-top table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Macro_criterion</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Attribute</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Unit</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td rowspan="2" style="text-align: left; vertical-align: top !important;">Conserving stocks</td>
-<td style="text-align: left;">Spawning Stock Biomass (SSB)</td>
-<td style="text-align: left;">t</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Fishing mortality (F)</td>
-<td style="text-align: left;">yr–1</td>
-</tr>
-<tr class="odd">
-<td rowspan="2" style="text-align: left; vertical-align: top !important;">Conserving biodiversity</td>
-<td style="text-align: left;">Mean maximum length across trophic guilds (MML)</td>
-<td style="text-align: left;">cm</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Apex vertebrate predator biomass (AVPB)</td>
-<td style="text-align: left;">t</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Conserving habitats</td>
-<td style="text-align: left;">Relative benthic state (RBS)</td>
-<td style="text-align: left;">% area with RBS≥0.8</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Mitigating climate change</td>
-<td style="text-align: left;">CO2 emissions per unit catch (CO2)</td>
-<td style="text-align: left;">tCO2 / kg</td>
-</tr>
-<tr class="odd">
-<td rowspan="3" style="text-align: left; vertical-align: top !important;">Sustaining communities</td>
-<td style="text-align: left;">Wage (WAGE)</td>
-<td style="text-align: left;">€</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Employment (EMPL)</td>
-<td style="text-align: left;">FTE</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Ratio between small and large scale fishery landing value (RSL)</td>
-<td style="text-align: left;">--</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Ensuring economic viability</td>
-<td style="text-align: left;">Gross value added (GVA)</td>
-<td style="text-align: left;">€</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>In decision-making processes we are often confronted with multiple options or scenarios, each carrying different values with respect to the criteria or attributes that we consider important. By comparing these criteria to reference thresholds, we can define our level of satisfaction with the different options.</p>
+<p>However, decision-making is rarely straightforward: stakeholders usually have diverse interests, which generate conflicts and unresolved trade-offs among alternatives.</p>
 </section>
-<section id="utility-funcitons-and-reference-points" class="level1">
-<h1>Utility funcitons and reference points</h1>
-<p>For every indicator, we defined a utility function that maps its value to a range between zero — representing minimum satisfaction — and one — representing maximum satisfaction. Utility functions incorporated reference points whenever available; otherwise, the current value of the indicator served as a baseline.</p>
+<section id="mcda" class="level1">
+<h1>MCDA</h1>
+<p>Multicriteria Decision Methods, or MCDM, provide a structured framework to address this complexity. They allow decision-makers to recognize possible trade-offs, to account for conflicting viewpoints, and to evaluate objectives that cannot be reduced to a single monetary dimension. This is particularly relevant in natural resource management, as shown in previous studies by Mardle and Pascoe (1999), Andalecio (2010), and Melià and colleagues (2017).</p>
 <p align="center">
-<img src="png/utility_F.png" width="45%"> <img src="png/utility_SSB_Bcurrent.png" width="45%"> <img src="png/utility_employment.png" width="45%"> <img src="png/utility_RSL.png" width="45%">
+<img src="png/tradeoff_seawise.png" width="100%">
 </p>
+<section id="mcda-in-fisheries-management" class="level2">
+<h2 class="anchored" data-anchor-id="mcda-in-fisheries-management">MCDA in Fisheries Management</h2>
+<p>Fisheries management is a clear example. Here, the challenge is to reconcile objectives such as maximizing fishing yields and profits while minimizing ecological and social impacts. The transition towards an ecosystem-based fisheries management approach complicates this even further, because of the growing number of indicators used to describe the system. These indicators give us a holistic view of the ecosystem, but they also increase the number of conflicts and trade-offs that must be addressed.</p>
 </section>
-<section id="alternativesscenarios" class="level1">
-<h1>Alternatives/Scenarios</h1>
-<p>We defined a number of scenarios based on the combination of time periods, climatic projections and management strategies.</p>
+</section>
+<section id="multi-attribute-utility-theory-maut" class="level1">
+<h1>Multi-Attribute Utility Theory (MAUT)</h1>
+<p>Among the different MCDM approaches, Multi-Attribute Utility Theory, or MAUT (Keeney and Raiffa 1993), has gained particular relevance in resource and environmental management. MAUT is based on the idea that decision-makers aim to maximize their overall satisfaction, or expected utility, across multiple independent attributes — each representing a decision objective.</p>
+<p align="center">
+<img src="png/tradeoff_seawise.png" width="100%">
+</p>
+<section id="maut-key-steps" class="level2">
+<h2 class="anchored" data-anchor-id="maut-key-steps">MAUT key steps</h2>
+<p>The main steps of MAUT are the following:</p>
+<ul>
+<li>identifying decision objectives and relevant indicators (attributes) to measure performance with respect to each of them;</li>
+<li>developing utility functions that express the desirability, or satisfaction, associated with a given indicator value;</li>
+<li>assigning weights to attributes reflecting their importance in the decision;</li>
+<li>aggregating weighted utilities into a composite score representing the overall performance of a scenario;</li>
+<li>comparing scenarios in terms of overall performance.</li>
+</ul>
+</section>
+<section id="utility-scores" class="level2">
+<h2 class="anchored" data-anchor-id="utility-scores">Utility scores</h2>
+<p>The performance of each objective is translated into a utility score, and these partial utilities are then aggregated into a single measure of overall performance. This facilitates clear comparisons among management scenarios, promotes stakeholder engagement, and supports transparent, evidence-based policies.</p>
+<p align="center">
+<img src="png/Immagine2.png" width="45%"> <img src="png/Immagine3.png" width="45%">
+</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -704,13 +660,13 @@ document.addEventListener("DOMContentLoaded", function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./01_Theory.html" class="pagination-link" aria-label="Multi-Criteria Decision Analysis (MCDA)">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Multi-Criteria Decision Analysis (MCDA)</span></span>
+      <a href="./index.html" class="pagination-link" aria-label="SeaWise WP6.12 Tutorial - MCDA">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">SeaWise WP6.12 Tutorial - MCDA</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./02_R-script.html" class="pagination-link" aria-label="R-script">
-        <span class="nav-page-text"><span class="chapter-title">R-script</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./01_Theory Seawise_example.html" class="pagination-link" aria-label="Seawise MCDA example">
+        <span class="nav-page-text"><span class="chapter-title">Seawise MCDA example</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

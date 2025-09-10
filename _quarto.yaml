@@ -1,5 +1,6 @@
 project:
   type: book
+  output-dir: docs
 
 book:
   title: "SEAwise Tutorial WP6: Multi-Criteria Decision Analysis"
