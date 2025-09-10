@@ -1,0 +1,118 @@
+
+
+/* Sfondo solo per la homepage */
+body.homepage {
+  background: url("png/PRIMARY_SeaWiseLOGO_Full_Colour.png") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Velo bianco semitrasparente sopra lo sfondo */
+body.homepage::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(255, 255, 255, 0.865);
+  z-index: -1;
+}
+
+
+.sidebar.sidebar-navigation {
+  position: fixed;
+  width: 200px !important;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-right: 1px solid #ddd;
+  background-color: #00518081 !important; /* blu scuro */
+  color: white;
+}
+.sidebar.sidebar-navigation a,
+.sidebar.sidebar-navigation a:visited {
+  color: white !important;
+}
+.sidebar.sidebar-navigation a:hover {
+  color: hsl(152, 72%, 43%) !important; /* oro al passaggio */
+}
+
+/* 3. Sidebar DESTRA (TOC della pagina) */
+.sidebar.sidebar-toc {
+  position: fixed;
+  width: 200px !important;
+  top: 0;
+  right: 0;
+  height: 100%;
+  border-left: 1px solid #ddd;
+  background-color: white !important;
+  overflow-y: auto; /* scroll separato se il TOC è lungo */
+  color: black;
+}
+.sidebar.sidebar-toc a,
+.sidebar.sidebar-toc a:visited {
+  color: black !important;
+}
+.sidebar.sidebar-toc a:hover {
+  color: #004080 !important; /* blu al passaggio */
+}
+
+/* Contenitore in fondo alla sidebar */
+.sidebar.sidebar-navigation .floating-link-in-sidebar {
+  text-align: center;
+  margin: 10px auto;
+  font-size: 0.6em;
+  opacity: 0.85;
+}
+
+/* Icone affiancate */
+.sidebar.sidebar-navigation .floating-link-in-sidebar .link-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* spazio tra le icone */
+  margin-bottom: 6px;
+}
+
+/* Stile per le immagini */
+.sidebar.sidebar-navigation .floating-link-in-sidebar img {
+  width: 30px;    /* piccole */
+  height: auto;
+  opacity: 0.8;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.sidebar.sidebar-navigation .floating-link-in-sidebar img:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+/* Testo sotto */
+.sidebar.sidebar-navigation .floating-link-in-sidebar .sidebar-note {
+  font-size: 0.9em;
+  color: #e0e0e0;
+  margin: 0;
+}
+
+
+
+/* Link di navigazione Next/Prev */
+.nav-page {
+  font-size: 1.2em;       /* testo più grande */
+  font-weight: bold;
+}
+
+.nav-page a {
+  color: #004080 !important;   /* blu scuro */
+  text-decoration: none;
+}
+
+.nav-page a:hover {
+  color: hsl(152, 72%, 43%) !important;   /* oro al passaggio */
+}
+
+
+
+.content {
+  max-width: none;      /* rimuovi limite artificiale */
+  background-color: rgba(255, 255, 255, 0.9); /* bianco quasi opaco */
+  border-radius: 12px;
+  padding: 20px;
+}
