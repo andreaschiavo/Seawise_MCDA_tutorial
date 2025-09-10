@@ -4,7 +4,9 @@ format:
   html:
     theme: simple
     css: custom.css
-    include-after-body: floating-link.html
+    include-after-body:
+      - floating-link.html
+      - footer.html
     toc: false
 ---
 

@@ -3,7 +3,9 @@ title: "Option file Generation"
 format:
   html:
     css: custom.css
-    include-after-body: floating-link.html
+    include-after-body:
+      - floating-link.html
+      - footer.html
 ---
 
 The **mcda.R** script uses an option file in .json format to pick the information on the criteria needed into the analysis (sub-criteria, weights, utility functions, reference points and input data path).

@@ -217,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>3 types of graphs can be generated with this library using the dataframe output from the MCDA analysis:</p>
 <section id="stacked-bar-chart-plot_histogram" class="level1">
 <h1>1. Stacked bar chart (<em>plot_histogram</em>):</h1>
-<p>This function generates a stacked bar chart. On the x axis the scenarios, on the y axis the utility values for the criteria of the MCDA. The <em>weights</em> argument is always needed; <em>scenarios</em> (default, = NULL) can be passed as a list of scenarios to compare fewer alternatives. If NULL or blank, all the scenarios included in the MCDA are plotted; <em>facet</em> (default = TRUE) is used to plot the combination of time-periods, management and climate scenarios. if FALSE, management and climate are merged. <em>color</em> (default, = “Set3”) can be modified with a discrete color palette from <strong>RColorBrewer</strong>;</p>
+<p>This function generates a stacked bar chart. On the x axis the scenarios, on the y axis the utility values for the criteria of the MCDA. - The <em>weights</em> argument is always needed; - <em>scenarios</em> (default, = NULL) can be passed as a list of scenarios to compare fewer alternatives. If NULL or blank, all the scenarios included in the MCDA are plotted; - <em>facet</em> (default = TRUE) is used to plot the combination of time-periods, management and climate scenarios. if FALSE, management and climate are merged. - <em>color</em> (default, = “Set3”) can be modified with a discrete color palette from <strong>RColorBrewer</strong>;</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_histogram</span>(df,</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">criteria =</span> <span class="fu">c</span>(<span class="st">"stocks"</span>, <span class="st">"biodiversity"</span>,<span class="st">"habitats"</span>, <span class="st">"community"</span>, <span class="st">"revenue"</span>, <span class="st">"climate change"</span>),</span>
@@ -236,7 +236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="utility-matrix-visualization-plot_matrix" class="level1">
 <h1>2. Utility matrix visualization (<em>plot_matrix</em>)</h1>
-<p>This function generates a matrix plot. On the x axis the criteria, on the y axis the scenarios, while the color gradient represents the utility values. <em>criteria</em> (default, = “all”) is the list of criteria to plot; <em>scenarios</em> (default, = “all”) is the list of scenarios to plot; <em>color</em> (default, = “Set3”) can be modified with a discrete color palette from <strong>RColorBrewer</strong>; <em>style</em> (default, = “minimal”) sets the style of the plot</p>
+<p>This function generates a matrix plot. On the x axis the criteria, on the y axis the scenarios, while the color gradient represents the utility values. - <em>criteria</em> (default, = “all”) is the list of criteria to plot; - <em>scenarios</em> (default, = “all”) is the list of scenarios to plot; - <em>color</em> (default, = “Set3”) can be modified with a discrete color palette from <strong>RColorBrewer</strong>; - <em>style</em> (default, = “minimal”) sets the style of the plot</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_matrix</span>(df, <span class="at">criteria =</span> <span class="fu">c</span>(<span class="st">"stocks"</span>, <span class="st">"biodiversity"</span>,<span class="st">"habitats"</span>, <span class="st">"community"</span>, <span class="st">"revenue"</span>, <span class="st">"climate change"</span>, <span class="st">"total_utility"</span>),</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"Blues"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -252,7 +252,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="parallel-plot-plot_parallel_graph" class="level1">
 <h1>3. Parallel plot (<em>plot_parallel_graph</em>)</h1>
 <p>This function generates a parallel plot. On the x axis the criteria, on the y axis the utilities; the lines connecting the criteria axes are the utilities of the different scenarios.</p>
-<p><em>criteria</em> is the list of criteria to plot; <em>highlight</em> (default, = “top”) is the criterion for selecting the highlighted scenarios; <em>top_bottom_criterion</em> (default, = “total_utility”) the criterion for sorting the top scenarios (this function uses the <em>top_scenario</em> function);</p>
+<ul>
+<li><em>criteria</em> is the list of criteria to plot;</li>
+<li><em>highlight</em> (default, = “top”) is the criterion for selecting the highlighted scenarios;</li>
+<li><em>top_bottom_criterion</em> (default, = “total_utility”) the criterion for sorting the top scenarios (this function uses the <em>top_scenario</em> function);</li>
+</ul>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_parallel_graph</span>(df, <span class="at">criteria =</span> <span class="fu">c</span>(<span class="st">'combined_ssb'</span>, <span class="st">'combined_f'</span>, <span class="st">'rbs'</span>, <span class="st">'mml'</span>, <span class="st">'avpb'</span>, <span class="st">'empl'</span>, <span class="st">'wage'</span>, <span class="st">'gva'</span>,<span class="st">'co2'</span>, <span class="st">'rsl'</span>), <span class="co">#</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">highlight =</span> <span class="st">"top"</span>,</span>
@@ -313,6 +317,16 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 </script>
+
+<div class="page-footer">
+
+  <a href="https://github.com/andreaschiavo/Seawise_MCDA_tutorial" target="_blank">
+
+    View source code on GitHub
+
+  </a>
+
+</div>
 
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
