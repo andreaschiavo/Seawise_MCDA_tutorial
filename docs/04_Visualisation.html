@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Visualization – SEAwise Tutorial WP6: Multi-Criteria Decision Analysis</title>
+<title>Visualisation – SEAwise Tutorial WP6: Multi-Criteria Decision Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -119,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04_Visualization.html"><span class="chapter-title">Visualization</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04_Visualisation.html"><span class="chapter-title">Visualisation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -168,7 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_Visualization.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Visualization</span></a>
+  <a href="./04_Visualisation.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Visualisation</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -197,7 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Visualization</span></h1>
+<h1 class="title"><span class="chapter-title">Visualisation</span></h1>
 </div>
 
 
@@ -214,10 +214,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>3 types of graphs can be generate with this library using the dataframe output from the MCDA analysis:</p>
+<p>3 types of graphs can be generated with this library using the dataframe output from the MCDA analysis:</p>
 <section id="stacked-bar-chart-plot_histogram" class="level1">
 <h1>1. Stacked bar chart (<em>plot_histogram</em>):</h1>
-<p>This function generates a stacked bar chart. On the x axis the scenarios, on the y axis the utility values for the criteria of the MCDA. <em>weights</em> argument is always needed; <em>scenarios</em> (default, = NULL) can be passed as a list of scenarios to compare fewer alternatives. If NULL or blank, all the scenarios included in the MCDA are plotted; <em>facet</em> (default = TRUE) is used to plot che combination of time-periods, management and climate scenarios. if FALSE, management and climate are merged. <em>color</em> (default, = “Set3”) can be modified with a discrete color palette from <strong>RColorBrewer</strong>;</p>
+<p>This function generates a stacked bar chart. On the x axis the scenarios, on the y axis the utility values for the criteria of the MCDA. The <em>weights</em> argument is always needed; <em>scenarios</em> (default, = NULL) can be passed as a list of scenarios to compare fewer alternatives. If NULL or blank, all the scenarios included in the MCDA are plotted; <em>facet</em> (default = TRUE) is used to plot the combination of time-periods, management and climate scenarios. if FALSE, management and climate are merged. <em>color</em> (default, = “Set3”) can be modified with a discrete color palette from <strong>RColorBrewer</strong>;</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_histogram</span>(df,</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">criteria =</span> <span class="fu">c</span>(<span class="st">"stocks"</span>, <span class="st">"biodiversity"</span>,<span class="st">"habitats"</span>, <span class="st">"community"</span>, <span class="st">"revenue"</span>, <span class="st">"climate change"</span>),</span>
@@ -228,7 +228,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="04_Visualization_files/figure-html/figures-side-1.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p><img src="04_Visualisation_files/figure-html/figures-side-1.png" class="img-fluid figure-img" style="width:50.0%"></p>
 </figure>
 </div>
 </div>
@@ -236,14 +236,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="utility-matrix-visualization-plot_matrix" class="level1">
 <h1>2. Utility matrix visualization (<em>plot_matrix</em>)</h1>
-<p>This function generates matrix plot. On the x axis the criteria, on the y axis the scenarios, while the color gradient represent the utility values. <em>criteria</em> (default, = “all”) is the list of criteria to plot; <em>scenarios</em> (default, = “all”) is the list of scenarios to plot; <em>color</em> (default, = “Set3”) can be modified with a discrete color palette from <strong>RColorBrewer</strong>; <em>style</em> (default, = “minimal”) set the style of the plot</p>
+<p>This function generates a matrix plot. On the x axis the criteria, on the y axis the scenarios, while the color gradient represents the utility values. <em>criteria</em> (default, = “all”) is the list of criteria to plot; <em>scenarios</em> (default, = “all”) is the list of scenarios to plot; <em>color</em> (default, = “Set3”) can be modified with a discrete color palette from <strong>RColorBrewer</strong>; <em>style</em> (default, = “minimal”) sets the style of the plot</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_matrix</span>(df, <span class="at">criteria =</span> <span class="fu">c</span>(<span class="st">"stocks"</span>, <span class="st">"biodiversity"</span>,<span class="st">"habitats"</span>, <span class="st">"community"</span>, <span class="st">"revenue"</span>, <span class="st">"climate change"</span>, <span class="st">"total_utility"</span>),</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"Blues"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="04_Visualization_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="04_Visualisation_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -251,9 +251,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="parallel-plot-plot_parallel_graph" class="level1">
 <h1>3. Parallel plot (<em>plot_parallel_graph</em>)</h1>
-<p>This function generates a parallel plot. On the x axis the criteria, on the y axis the utilities; the plots connecting the criteria axes are the utilities of the different scenarios.</p>
-<p><em>criteria</em> is the list of criteria to plot; <em>highlight</em> (default, = “top”) is the criterion for selecting the highlighted scenarios; <em>top_bottom_criterion</em> (default, = “total_utility”) the criterion for sorting of the top scenarios (this function uses the <em>top_scenario</em> function);</p>
-<p>v.0 note: only top 5 scenarios sorted by “total_utility” can be highlighted in this version. the idea is to having the possibility to pass a list of scenarios into <em>highlight</em> to highlight those in the chart</p>
+<p>This function generates a parallel plot. On the x axis the criteria, on the y axis the utilities; the lines connecting the criteria axes are the utilities of the different scenarios.</p>
+<p><em>criteria</em> is the list of criteria to plot; <em>highlight</em> (default, = “top”) is the criterion for selecting the highlighted scenarios; <em>top_bottom_criterion</em> (default, = “total_utility”) the criterion for sorting the top scenarios (this function uses the <em>top_scenario</em> function);</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_parallel_graph</span>(df, <span class="at">criteria =</span> <span class="fu">c</span>(<span class="st">'combined_ssb'</span>, <span class="st">'combined_f'</span>, <span class="st">'rbs'</span>, <span class="st">'mml'</span>, <span class="st">'avpb'</span>, <span class="st">'empl'</span>, <span class="st">'wage'</span>, <span class="st">'gva'</span>,<span class="st">'co2'</span>, <span class="st">'rsl'</span>), <span class="co">#</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">highlight =</span> <span class="st">"top"</span>,</span>
@@ -261,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="04_Visualization_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="1056"></p>
+<p><img src="04_Visualisation_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="1056"></p>
 </figure>
 </div>
 </div>

@@ -10,10 +10,8 @@ format:
 
 # Introduction
 
-In decision-making processes, we are often confronted with multiple options or scenarios, each carrying different values with respect to the criteria or attributes that we consider important.
-By comparing these criteria against reference thresholds, we can define our level of satisfaction with the different options.
-
-However, decision-making is rarely straightforward. Stakeholders usually have diverse interests, which generate conflicts and unresolved trade-offs among alternatives.
+In decision-making processes, we are often confronted with multiple options or scenarios, each carrying different values with respect to the criteria or attributes that we consider important. By comparing these criteria against reference thresholds, we can define our level of satisfaction with the different options.
+However, decision-making is rarely straightforward. Stakeholders usually have diverse priorities, which generate conflicts and require trade-offs among contrasting objectives.
 
 # MCDA
 
@@ -31,7 +29,7 @@ Fisheries management provides a clear example. Here, the challenge is to reconci
 
 # Multi-Attribute Utility Theory (MAUT)
 
-Among the different MCDA approaches, Multi-Attribute Utility Theory (MAUT; Keeney and Raiffa, 1993) has gained particular relevance in resource and environmental management. MAUT is based on the idea that decision-makers aim to maximize their overall satisfaction, or expected utility, across multiple independent attributes — each representing a decision objective.
+Among the different MCDA approaches, Multi-Attribute Utility Theory (MAUT; [Keeney and Raiffa, 1993](https://doi.org/10.1017/CBO9781139174084)) has gained particular relevance in resource and environmental management. MAUT is based on the idea that decision-makers aim to maximize their overall satisfaction, or expected utility, across multiple independent attributes — each representing a decision objective.
 
 ## MAUT key steps
 
@@ -48,7 +46,7 @@ The main steps of MAUT are the following:
 
 ## Utility scores
 
-The performance of each objective is translated into a utility score, and these partial utilities are then aggregated into a single measure of overall performance. This facilitates clear comparisons among management scenarios, promotes stakeholder engagement, and supports transparent, evidence-based policy-making.
+The performance of each objective is translated into a utility score. Partial utilities (i.e. relative to a specific criterion) are then aggregated into a single measure of overall performance. This facilitates clear comparisons among management scenarios, promotes stakeholder engagement, and supports transparent, evidence-based policy-making.
 
 <p align="center">
   <img src="png/Immagine2.png" width="45%"/>

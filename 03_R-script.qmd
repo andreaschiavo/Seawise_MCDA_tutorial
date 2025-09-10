@@ -8,7 +8,7 @@ format:
 ---
 # 1. Input file format
 
-The **mcda.R** script needs a specific input data format and must have the following structure:
+The **mcda.R** script needs a specific input data format, which must have the following structure:
 
 column1: *"time_period"*, column2: *"scenario"*, (optional) column3: *"other columns(e.g. quantile level)"*, column4-columnN: <name_of_the_criteria>
 
@@ -22,11 +22,11 @@ column names from 1 to 3/4 cannot be changed as the **mcda.R** script uses them 
 
 *time_period and scenario labels must be consistent for all the criteria.*
 
-The path of the input data must be specified into the option file described above for all the criteria.
-the chunck below is an example of input dataframe for *ssb* and *f* (with the different stocks as sub-criteria) and for socioeconomic criteria.
+The path of the input data must be specified into the option file described above for all criteria.
+The chunk below is an example of input dataframe for *ssb* and *f* (with the different stocks as sub-criteria) and for socioeconomic criteria.
 
 
-Note that it's possible to have all criteria without sub-criteria or those with sub-criteria in a single file
+Note that it is possible to have all criteria without sub-criteria or those sharing the same sub-criteria in a single file.
 
 ```{r}
 
@@ -66,10 +66,10 @@ mcda <- Mcda(time_period,
 
 ```
 
-# 4 Load input data and calculate the utitlity scores
+# 4 Load input data and calculate the utility scores
 
-Load the input data and calculate the utitlities of the critaria based on the MCDA option file (see [last section](05_genOptionsFile.html))
-Utilities are calculated based on utility functions and reference points defined for each criteria into the options file.
+Load the input data and calculate the utilities of the criteria based on the MCDA option file (see [last section](05_genOptionsFile.html))
+Utilities are calculated based on utility functions and reference points defined for each criterion in the options file.
 
 ```{r, echo = TRUE}
 
@@ -79,9 +79,8 @@ mcda <- calculate_utilities(mcda, quantile = 0.5)
 
 ```
 
-quantile = 0.5 it's an additional argument (...). 
-It is needed to add a filter to the input dataset and extract one single value of the criteria for each combination of time-period and management scenario (alternatives). Without this additional argument the function would filter only by time-period and scenario (default filter), returning a dataset with quantile levels (if present in the dataset) and failing the calculation of the utilities.
-
+quantile = 0.5 is an additional argument (...). 
+It is needed to add a filter to the input dataset and extract a single value of each criterion for each combination of time-period and management scenario (alternatives). Without this additional argument the function will filter only by time-period and scenario (default filter).
 
 # 5 Weighting system
 
@@ -113,14 +112,14 @@ sprintf("Weight of SSB after modification: %.2f", mcda$weights['ssb'])
 # 6 Criteria aggregation
 ## Sub-criteria
 Once the *mcda* object is created and the utilities are calculated it is possible to aggregate the criteria.
-two methods are implemented:
+Two methods are implemented:
 
-- *sum*: this method performs the sum of the utilities of the criteria passed. If *weighted* is set to TRUE, the output would be a weighted sum with normalized weights between 0-1.
+- *sum*: this method calculates the sum of the utilities of the criteria passed. If *weighted* is set to TRUE, the output will be a weighted sum with normalized weights between 0-1.
 
-- *gmean*: this method performs the geometric mean of the utilities of the criteria passed. If *weighted* is set to TRUE, the output would be a weighted geometric mean with normalized weights between 0-1.
+- *gmean*: this method calculates the geometric mean of the utilities of the criteria passed. If *weighted* is set to TRUE, the output will be a weighted geometric mean with normalized weights between 0-1.
 
 If a criterion has sub-criteria, these can be aggregated by passing the *sub_criteria* argument as TRUE.
-If two criteria that share the same sub-criteria/criterion are passed with *sub_criteria* = TRUE, they will be combined into a new criterion retaining the same sub-criteria as the original ones.
+If two criteria that share the same sub-criteria/criterion are passed with *sub_criteria* = TRUE, they will be combined into a new criterion keeping the same list of sub-criteria as the original ones.
 
 One criterion can be passed with *sub_criteria* = FALSE to generate a new labeled criterion.
 
@@ -150,7 +149,7 @@ mcda <- aggregate_utilities(mcda,
 
 ## Macro-criteria
 
-Aggregate the criteria into the macro-criteria. Macro-criteria are then passed to the *run_maut* function.
+Aggregates criteria into macro-criteria. Macro-criteria are then passed to the *run_maut* function.
 This function runs the Multi-Attribute Utility Theory analysis performing a weighted sum on the passed criteria.
 
 
@@ -178,12 +177,12 @@ mcda <- aggregate_utilities(mcda, criteria = c('co2'), label = "climate change",
 
 # 7 Total utility
 
-Now, the total utility is calculated resulting from the combination of the passed macro-criteria, across all the scenarios and time-periods.
+Now, the total utility is calculated by aggregating the passed macro-criteria, across all the scenarios and time-periods.
 
-To visualize the outputs, a dataframe can be generated with the function *generate_df*.
+To visualise the outputs, a dataframe can be generated with the function *generate_df*.
 It is also possible to extract the utilities of the sub-criteria, by passing the list of criteria carrying those sub-criteria in the *sub_criteria* argument.
 
-The function *top_scenarios* returns a dataframe with a selected number of scenarios (default *num* = 5), sorted by one selected criterion (*criterion* = "total_utility", default), in ascending (*ascending* = TRUE) or descending (*ascending* = FALSE, default) order. When the *facet_cols* argument is set to TRUE (=default), the dataframe is generated with separated columns for management scenarios, climate change scenarios and time-period. if is set to FALSE, management and climate change are merged in a single columns.
+The function *top_scenarios* returns a dataframe with a selected number of scenarios (default *num* = 5), sorted by one selected criterion (*criterion* = "total_utility", default), in ascending (*ascending* = TRUE) or descending (*ascending* = FALSE, default) order. When the *facet_cols* argument is set to TRUE (=default), the dataframe is generated with separated columns for management scenarios, climate change scenarios and time-period. if is set to FALSE, management and climate change scenarios are merged into a single column.
 
 ```{r, echo = TRUE}
 

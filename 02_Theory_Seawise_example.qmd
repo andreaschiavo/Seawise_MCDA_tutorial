@@ -53,7 +53,7 @@ knitr::kable(df, booktabs = TRUE, align = "lll") %>%
   kableExtra::collapse_rows(columns = 1, valign = "top")
 ```
 
-# Utility funcitons and reference points
+# Utility functions and reference points
 
 For every indicator, we defined a utility function that maps its value to a range between zero — representing minimum satisfaction — and one — representing maximum satisfaction. Utility functions incorporated reference points whenever available; otherwise, the current value of the indicator served as a baseline.
 

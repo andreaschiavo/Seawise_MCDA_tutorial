@@ -10,7 +10,7 @@ book:
     - 01_Theory.qmd
     - 02_Theory_Seawise_example.qmd
     - 03_R-script.qmd
-    - 04_Visualization.qmd
+    - 04_Visualisation.qmd
     - 05_genOptionsFile.qmd
 
 format:
