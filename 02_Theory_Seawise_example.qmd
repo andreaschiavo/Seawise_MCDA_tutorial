@@ -68,8 +68,11 @@ For every indicator, we defined a utility function that maps its value to a rang
 
 # Alternatives/Scenarios
 
-We defined a number of scenarios based on the combination of time periods, climatic projections and management strategies.
+We defined a set of scenarios by combining different time horizons, climate projections, and fisheries management strategies:
 
-*table with the scenarios here*
+- Time periods covering the years 2025 to 2060;
 
+- Two climate projections, based on Representative Concentration Pathways (RCPs) from the IPCC;
+
+- Case-study-specific fisheries management strategies, reflecting alternative regulatory approaches.
 

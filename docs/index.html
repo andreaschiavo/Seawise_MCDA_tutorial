@@ -203,6 +203,8 @@ ul.task-list li input[type="checkbox"] {
 
 document.addEventListener("DOMContentLoaded", function() {
 
+  // blocco icone centrali
+
   const div = document.createElement("div");
 
   div.className = "floating-link-in-sidebar";
@@ -225,7 +227,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
     </div>
 
-    <p class="sidebar-note">developed in Seawise</p>
+    <p class="sidebar-note">Developed in Seawise</p>
+
+  `;
+
+
+
+  // blocco source code in basso
+
+  const sourceDiv = document.createElement("div");
+
+  sourceDiv.className = "source-link-in-sidebar";
+
+  sourceDiv.innerHTML = `
+
+    <a href="https://github.com/andreaschiavo/Seawise_MCDA_tutorial" target="_blank">
+
+      <span>Source code</span>
+
+      <img src="png/github-mark.png" alt="GitHub source">
+
+    </a>
 
   `;
 
@@ -235,7 +257,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (sidebar) {
 
-    sidebar.appendChild(div);
+    sidebar.appendChild(div);       // blocco icone normali
+
+    sidebar.appendChild(sourceDiv); // link in basso
 
   }
 
@@ -253,11 +277,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <div class="page-footer">
 
-  <a href="https://github.com/andreaschiavo/Seawise_MCDA_tutorial" target="_blank">
+    Developed in Quarto by Andrea Schiavo
 
-    View source code on GitHub
-
-  </a>
+  
 
 </div>
 

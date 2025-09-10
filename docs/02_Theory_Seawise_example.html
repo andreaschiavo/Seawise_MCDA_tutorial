@@ -247,8 +247,12 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="alternativesscenarios" class="level1">
 <h1>Alternatives/Scenarios</h1>
-<p>We defined a number of scenarios based on the combination of time periods, climatic projections and management strategies.</p>
-<p><em>table with the scenarios here</em></p>
+<p>We defined a set of scenarios by combining different time horizons, climate projections, and fisheries management strategies:</p>
+<ul>
+<li><p>Time periods covering the years 2025 to 2060;</p></li>
+<li><p>Two climate projections, based on Representative Concentration Pathways (RCPs) from the IPCC;</p></li>
+<li><p>Case-study-specific fisheries management strategies, reflecting alternative regulatory approaches.</p></li>
+</ul>
 
 
 </section>
@@ -257,6 +261,8 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
 document.addEventListener("DOMContentLoaded", function() {
+
+  // blocco icone centrali
 
   const div = document.createElement("div");
 
@@ -280,7 +286,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
     </div>
 
-    <p class="sidebar-note">developed in Seawise</p>
+    <p class="sidebar-note">Developed in Seawise</p>
+
+  `;
+
+
+
+  // blocco source code in basso
+
+  const sourceDiv = document.createElement("div");
+
+  sourceDiv.className = "source-link-in-sidebar";
+
+  sourceDiv.innerHTML = `
+
+    <a href="https://github.com/andreaschiavo/Seawise_MCDA_tutorial" target="_blank">
+
+      <span>Source code</span>
+
+      <img src="png/github-mark.png" alt="GitHub source">
+
+    </a>
 
   `;
 
@@ -290,7 +316,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (sidebar) {
 
-    sidebar.appendChild(div);
+    sidebar.appendChild(div);       // blocco icone normali
+
+    sidebar.appendChild(sourceDiv); // link in basso
 
   }
 
@@ -300,11 +328,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <div class="page-footer">
 
-  <a href="https://github.com/andreaschiavo/Seawise_MCDA_tutorial" target="_blank">
+    Developed in Quarto by Andrea Schiavo
 
-    View source code on GitHub
-
-  </a>
+  
 
 </div>
 

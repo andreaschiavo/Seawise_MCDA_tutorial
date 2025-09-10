@@ -32,7 +32,7 @@ body.homepage::before {
   color: white !important;
 }
 .sidebar.sidebar-navigation a:hover {
-  color: hsl(152, 72%, 43%) !important; /* oro al passaggio */
+  color: hsl(237, 100%, 11%) !important; /* oro al passaggio */
 }
 
 /* 3. Sidebar DESTRA (TOC della pagina) */
@@ -52,14 +52,14 @@ body.homepage::before {
   color: black !important;
 }
 .sidebar.sidebar-toc a:hover {
-  color: #004080 !important; /* blu al passaggio */
+  color: hsl(237, 100%, 11%) !important; /* blu al passaggio */
 }
 
 /* Contenitore in fondo alla sidebar */
 .sidebar.sidebar-navigation .floating-link-in-sidebar {
   text-align: center;
   margin: 10px auto;
-  font-size: 0.6em;
+  font-size: 0.9em;
   opacity: 0.85;
 }
 
@@ -75,7 +75,7 @@ body.homepage::before {
 .sidebar.sidebar-navigation .floating-link-in-sidebar img {
   width: 30px;    /* piccole */
   height: auto;
-  opacity: 0.8;
+  opacity: 0.9;
   transition: transform 0.2s, opacity 0.2s;
 }
 
@@ -105,7 +105,7 @@ body.homepage::before {
 }
 
 .nav-page a:hover {
-  color: hsl(152, 72%, 43%) !important;   /* oro al passaggio */
+  color: hsl(237, 100%, 11%) !important;   /* oro al passaggio */
 }
 
 
@@ -115,4 +115,47 @@ body.homepage::before {
   background-color: rgba(255, 255, 255, 0.9); /* bianco quasi opaco */
   border-radius: 12px;
   padding: 20px;
+}
+
+
+/* blocco source in basso */
+.sidebar.sidebar-navigation .source-link-in-sidebar {
+  position: absolute;   /* fisso in fondo */
+  bottom: 10px;
+  left: 10px;
+  font-size: 0.75em;
+  color:#14012cce;
+}
+
+.sidebar.sidebar-navigation .source-link-in-sidebar span {
+  color: #14012cce;   /* giallo oro (scegli tu il colore) */
+  font-size: 0.75em;
+  font-weight: bold;
+}
+
+.sidebar.sidebar-navigation .source-link-in-sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* spazio tra testo e immagine */
+  color: #000000b6;
+  text-decoration: none;
+}
+
+.sidebar.sidebar-navigation .source-link-in-sidebar a:hover {
+  text-decoration: underline;
+}
+
+.sidebar.sidebar-navigation .source-link-in-sidebar img {
+  width: 18px;
+  height: auto;
+  opacity: 0.9;
+}
+
+.page-footer {
+  
+  color: #00000063;              /* testo bianco */
+  font-size: 0.7em;
+  padding: 12px;
+  text-align: center;
+  
 }
