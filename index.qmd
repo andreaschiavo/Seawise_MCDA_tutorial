@@ -1,7 +1,6 @@
 ---
 title: "Index"
 author: "Andrea Schiavo"
-date: "September 2025"
 format:
     html:
         toc: false
