@@ -151,11 +151,3 @@ body.homepage::before {
   opacity: 0.9;
 }
 
-.page-footer {
-  
-  color: #00000063;              /* testo bianco */
-  font-size: 0.7em;
-  padding: 12px;
-  text-align: center;
-  
-}

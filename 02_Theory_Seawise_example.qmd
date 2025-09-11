@@ -61,7 +61,7 @@ For every indicator, we defined a utility function that maps its value to a rang
 
 <p align="center">
   <img src="png/utility_F.png" width="45%"/>
-  <img src="png/utility_SSB_Bcurrent.png" width="45%"/>
+  <img src="png/utility_SSB.png" width="45%"/>
   <img src="png/utility_employment.png" width="45%"/>
   <img src="png/utility_RSL.png" width="45%"/>
 </p>
