@@ -6,7 +6,6 @@ format:
     css: custom.css
     include-after-body:
       - floating-link.html
-      - footer.html
     toc: false
 ---
 

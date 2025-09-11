@@ -5,7 +5,6 @@ format:
         css: custom.css
         include-after-body:
             - floating-link.html
-            - footer.html
 ---
 ```{r, message=FALSE, warning=FALSE, error=FALSE, echo = FALSE}
 source("mcda.R")
